@@ -1,0 +1,40 @@
+<S> ::= <components>? <html_element>
+<html_element_body> ::= "{" <ws>* <html_element>* <ws>* "}"
+<html_element> ::= (<strict_string> <ws>* <html_element_body>) | <ws>* <quote_string> | <ws>* <variable> 
+
+<args> ::= (" " | <value> | (<value> <ws>* "," <ws>*)* <value>)
+
+<repeat> ::= "repeat" <ws>* "(" <ws>* <number> <ws>* ")" <ws>* <html_element_body>
+<each> ::= "each" <ws>* "[" <ws>* <args> <ws>* "]" <ws>* "as" <ws>* <variable> <ws>* <html_element_body>
+
+<components> ::= "components" <ws>* "{" <ws>* (<component> <ws>*)* "}"   
+<component> ::= <strict_string> <ws>* "(" <ws>* <args> <ws>* ")" <ws>* <html_element_body>
+
+/*fragments*/
+<number> ::= [1-9] [0-9]*
+<letter> ::= ([a-z] | [A-Z] | "_")
+<char> ::= ([a-z] | [A-Z] | [0-9] | "_")
+<ws> ::= (" " | "\n" | "\t")
+
+<strict_string> ::=  <letter> <char>*
+<quote_string> ::= "\"" (<char> | <ws>)* "\"" 
+
+<value> ::= ( <number> | <quote_string> )
+<variable> ::= "$" <strict_string>
+
+<condition_eq> ::= <expression> "==" <expression>
+<condition_gt> ::= <expression> ">" <expression>
+<condition_lt> ::= <expression> "<" <expression>
+<condition_gte> ::= <expression> ">=" <expression>
+<condition_lte> ::= <expression> "<=" <expression>
+<condition> ::= <condition_eq> | <condition_gt> | <condition_lt> | <condition_gte> | <condition_lte>
+
+<addition> ::= <expression> "+" <expression>
+<subtraction> ::= <expression> "-" <expression>
+<multiplication> ::= <expression> "*" <expression>
+<modulo> ::= <expression> "%" <expression>
+<operation> ::= <addition> | <subtraction> | <multiplication> | <modulo>
+
+<expression> ::= <variable> | <value> | <condition> | <operation>
+
+<switch> ::= ("switch" <ws>* "(" <expression> ")" <ws>* "{") <ws>* (<ws>* <value> <ws>? "->" <ws>* (<html_element> | <value>) <ws>* )* <ws>* "}" 
