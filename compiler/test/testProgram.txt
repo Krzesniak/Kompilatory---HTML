@@ -1,0 +1,48 @@
+components {
+    comp1 (arg1, arg2) {
+        p {
+            $arg1
+        }
+        p {
+            $arg2
+        }
+    }
+}
+
+html {
+    div {
+        p {
+            "Huzia na juzia"
+            "drugi string w p"
+        }
+        div {
+            "siała baba mak"
+        }
+    }
+
+    //line comment
+
+    repeat(3) {
+        a {
+            "aaaa xD"
+        }
+    }
+
+    each ["jakis string", "string2"] as var
+    {
+        p {
+            $var
+        }
+    }
+
+    testNestedRepeatVar {
+        each [2 + 1] as var
+        {
+            repeat(1 + $var) {
+                "Nested repeat with expr variable arg"
+            }
+        }
+    }
+
+    comp1("aarg1", "aarg2")
+}
