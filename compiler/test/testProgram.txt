@@ -22,9 +22,9 @@ html {
 
     //line comment
 
-    repeat(3) {
+    repeat(3 + -1) {
         a {
-            "aaaa xD"
+            "Repeat"
         }
     }
 

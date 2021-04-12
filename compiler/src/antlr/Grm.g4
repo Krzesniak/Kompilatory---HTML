@@ -79,7 +79,7 @@ Minus               : '-';
 ID : Letter Char*;
 VAR_ID : '$' Letter Char*;
 
-NUMBER : [1-9] Digit*;
+NUMBER : Minus?[1-9] Digit*;
 STRING : DoubleQuote .*? DoubleQuote;
 
 COMMENT : '//' ~[\r\n]* -> skip;
