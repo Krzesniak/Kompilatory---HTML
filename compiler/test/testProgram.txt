@@ -1,10 +1,34 @@
 components {
     comp1 (arg1, arg2) {
-        p {
+        divComp1 {
+            p {
+                $arg1
+            }
+            p {
+                $arg2
+            }
+        }
+    }
+
+    comp2 (arg1) {
+        divComp2 {
             $arg1
         }
-        p {
-            $arg2
+    }
+
+    compInner (argIn) {
+        divInner {
+            $argIn
+        }
+    }
+
+    compOuter(argOut) {
+        divOuter {
+            p {
+                $argOut
+            }
+            compInner("jakas stala z zewnatrz")
+            compInner($argOut)
         }
     }
 }
@@ -44,5 +68,7 @@ html {
         }
     }
 
-    comp1("aarg1", "aarg2")
+    comp1("c1arg1", "c1arg2")
+    comp2("c2arg1")
+    compOuter("argOuter")
 }
