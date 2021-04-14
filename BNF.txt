@@ -1,7 +1,7 @@
 <S> ::= <components>? <html_element>
 <html_element_body> ::= "{" <ws>* <html_element>* <ws>* "}"
-<html_element> ::= (<strict_string> <ws>* <html_element_body>) | <ws>* <quote_string> | <ws>* <variable> 
-
+<html_element> ::= (<strict_string> <ws>* <html_args>? <ws>* <html_element_body>) | <ws>* <quote_string> | <ws>* <variable> 
+<html_args> ::= "(" (<ws>* <strict_string> <ws>* "=" <quote_string> <ws>* ","? <ws>*)* ")"
 <args> ::= (" " | <value> | (<value> <ws>* "," <ws>*)* <value>)
 
 <repeat> ::= "repeat" <ws>* "(" <ws>* <number> <ws>* ")" <ws>* <html_element_body>
@@ -13,7 +13,7 @@
 /*fragments*/
 <number> ::= [1-9] [0-9]*
 <letter> ::= ([a-z] | [A-Z] | "_")
-<char> ::= ([a-z] | [A-Z] | [0-9] | "_")
+<char> ::= ([a-z] | [A-Z] | [0-9] | "_" | ":")
 <ws> ::= (" " | "\n" | "\t")
 
 <strict_string> ::=  <letter> <char>*
@@ -36,5 +36,6 @@
 <operation> ::= <addition> | <subtraction> | <multiplication> | <modulo>
 
 <expression> ::= <variable> | <value> | <condition> | <operation>
+<comment> ::= "//" <ws>* (<strict_string> <ws>*)* 
 
-<switch> ::= ("switch" <ws>* "(" <expression> ")" <ws>* "{") <ws>* (<ws>* <value> <ws>? "->" <ws>* (<html_element> | <value>) <ws>* )* <ws>* "}" 
+<switch> ::= ("switch" <ws>* "(" <expression> ")" <ws>* "{") <ws>* (<ws>* <value> <ws>? "->" <ws>* (<html_element> | <value>) <ws>* )* <ws>* "}"
