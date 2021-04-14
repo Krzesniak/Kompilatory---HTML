@@ -1,7 +1,7 @@
 <S> ::= <components>? <html_element>
 <html_element_body> ::= "{" <ws>* <html_element>* <ws>* "}"
 <html_element> ::= (<strict_string> <ws>* <html_args>? <ws>* <html_element_body>) | <ws>* <quote_string> | <ws>* <variable> 
-<html_args> ::= "(" (<ws>* <strict_string> <ws>* "=" <quote_string> <ws>* ","? <ws>*)* ")"
+<html_args> ::= "(" (<ws>* <strict_string> <ws>* "=" <ws>* <quote_string> <ws>* ","? <ws>*)* ")"
 <args> ::= (" " | <value> | (<value> <ws>* "," <ws>*)* <value>)
 
 <repeat> ::= "repeat" <ws>* "(" <ws>* <number> <ws>* ")" <ws>* <html_element_body>
