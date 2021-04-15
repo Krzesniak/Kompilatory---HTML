@@ -1,13 +1,12 @@
 package htmlable;
 
 import expression.Expression;
-import expression.Variable;
 
 import java.util.List;
 
 public class Component extends Htmlable{
-    private ComponentDefinition definition;
-    private List<Expression> args;
+    private final ComponentDefinition definition;
+    private final List<Expression> args;
 
     public Component(ComponentDefinition definition, List<Expression> args){
         this.definition = definition;

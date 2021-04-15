@@ -34,7 +34,6 @@ public abstract class Htmlable {
         return parent.getVariable(id);
     }
 
-    //probably evil
     public void spreadParent(){
         for(Variable v : variables.values()) {
             v.parent = this;

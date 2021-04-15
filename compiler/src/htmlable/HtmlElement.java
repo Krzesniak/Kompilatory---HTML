@@ -1,19 +1,19 @@
 package htmlable;
 
 public class HtmlElement extends Htmlable{
-    String name;
+    private final String name;
 
-    HtmlElement(String name) {
+    public HtmlElement(String name) {
         this.name = name;
     }
 
     @Override
     public String toString() {
-        String res = "<" + name + ">\n";
+        StringBuilder res = new StringBuilder("<" + name + ">\n");
         for(Htmlable h : htmlables)
-            res += h.toString() + "\n";
-        res += "</" + name + ">\n";
+            res.append(h.toString()).append("\n");
+        res.append("</").append(name).append(">\n");
 
-        return res;
+        return res.toString();
     }
 }

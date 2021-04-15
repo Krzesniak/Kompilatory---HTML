@@ -9,6 +9,9 @@ components {
             }
         }
     }
+    compWthArgs {
+
+    }
 
     comp2 (arg1) {
         divComp2 {
@@ -34,7 +37,7 @@ components {
 }
 
 html {
-    div {
+    div(style="display: none") {
         p {
             "Huzia na juzia"
             "drugi string w p"
@@ -44,11 +47,11 @@ html {
         }
     }
 
-    //line comment
+    // line comment comment
 
     repeat(3 + -1) {
-        a {
-            "Repeat"
+        a(height="3") {
+            "aaaa xD"
         }
     }
 

@@ -6,8 +6,8 @@ import expression.Variable;
 import java.util.List;
 
 public class Each extends Htmlable {
-    private List<Expression> args;
-    private Variable var;
+    private final List<Expression> args;
+    private final Variable var;
 
     public Each(Variable var, List<Expression> args) {
         this.var = var;
@@ -17,7 +17,7 @@ public class Each extends Htmlable {
 
     @Override
     public String toString() {
-        String res = "";
+        StringBuilder res = new StringBuilder();
         for (Expression arg : args) {
             switch (arg.getType()) {
                 case STRING -> var.setValue(arg.stringValue());
@@ -28,9 +28,9 @@ public class Each extends Htmlable {
             }
 
             for (Htmlable h : htmlables)
-                res += h.toString();
+                res.append(h.toString());
         }
-        return res;
+        return res.toString();
     }
 
     @Override

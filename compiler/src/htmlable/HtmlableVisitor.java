@@ -94,9 +94,11 @@ public class HtmlableVisitor extends GrmBaseVisitor<Htmlable> {
         ParseTree argsTree = ctx.getChild(2);
         List<String> argsIds = new LinkedList<>();
 
-        for (int i = 0; i < argsTree.getChildCount(); i += 2) {
-            String id = argsTree.getChild(i).getText();
-            argsIds.add(id);
+        if(argsTree!=null) {
+            for (int i = 0; i < argsTree.getChildCount(); i += 2) {
+                String id = argsTree.getChild(i).getText();
+                argsIds.add(id);
+            }
         }
         ComponentDefinition definition = new ComponentDefinition(componentId, argsIds);
 

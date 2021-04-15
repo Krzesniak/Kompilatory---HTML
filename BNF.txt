@@ -11,7 +11,7 @@
 <component> ::= <strict_string> <ws>* "(" <ws>* <args> <ws>* ")" <ws>* <html_element_body>
 
 /*fragments*/
-<number> ::= [1-9] [0-9]*
+<number> ::= "0" | "-"? [1-9] [0-9]*
 <letter> ::= ([a-z] | [A-Z] | "_")
 <char> ::= ([a-z] | [A-Z] | [0-9] | "_" | ":")
 <ws> ::= (" " | "\n" | "\t")
@@ -19,7 +19,7 @@
 <strict_string> ::=  <letter> <char>*
 <quote_string> ::= "\"" (<char> | <ws>)* "\""
 
-<value> ::= ( <number> | <quote_string> )
+<value> ::= ( <number> | <quote_string> | "true" | "false")
 <variable> ::= "$" <strict_string>
 
 <condition_eq> ::= <expression> "==" <expression>
@@ -38,4 +38,5 @@
 <expression> ::= <variable> | <value> | <condition> | <operation>
 <comment> ::= "//" <ws>* (<strict_string> <ws>*)*
 
-<switch> ::= ("switch" <ws>* "(" <expression> ")" <ws>* "{") <ws>* (<ws>* <value> <ws>? "->" <ws>* (<html_element> | <value>) <ws>* )* <ws>* "}"
+<switch> ::= ("switch" <ws>* "(" <expression> ")" <ws>* "{") <ws>* (<ws>* <switch_line> <ws>* )* <ws>* "}"
+<switch_line> ::=  <value> <ws>? "->" <ws>* (<html_element> | <value>) | "else -> " <ws>* (<html_element> | <value>)

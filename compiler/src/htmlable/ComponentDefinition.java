@@ -22,10 +22,10 @@ public class ComponentDefinition extends Htmlable {
 
     @Override
     public String toString() {
-        String res = "";
+        StringBuilder res = new StringBuilder();
         for(Htmlable h : htmlables)
-            res += h.toString() + "\n";
+            res.append(h.toString()).append("\n");
 
-        return res;
+        return res.toString();
     }
 }

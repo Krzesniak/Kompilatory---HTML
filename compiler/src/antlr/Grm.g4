@@ -4,7 +4,7 @@ grammar Grm;
 prog: components element EOF                                               #Program;
 
 components : COMPONENTS '{' component_definition* '}';
-component_definition : ID '(' id_args ')' '{' htmlable* '}';
+component_definition : ID ('(' id_args ')')? '{' htmlable* '}';
 
 component : ID LeftParen expr_args RightParen ;
 
@@ -16,7 +16,7 @@ switche: SWITCH LeftParen expr RightParen '{' switch_line '}';
 switch_line: expr Arrow htmlable;
 
 element
-    : ID '{' htmlable* '}'                                                  #HTML_element
+    : ID args '{' htmlable* '}'                                               #HTML_element
     | expr                                                                  #HTML_inner;
 
 //evaluates to string or integer
@@ -42,6 +42,8 @@ htmlable
 
 expr_args : ( | (expr Comma)* expr);
 id_args : ( | (ID Comma)* ID);
+args: ('(' (ID '=' STRING ','? WS*)* ')')?;
+
 
 /*
  * Lexer Rules
