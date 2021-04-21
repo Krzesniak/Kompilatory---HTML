@@ -1,0 +1,17 @@
+components {
+    comp1(){
+
+    }
+    comp1(){}
+}
+
+html {
+    div {
+        "Poprawny div"
+    }
+
+    repeat("nieliczba") {
+        "argument repeat nie jest liczba"
+    }
+}
+

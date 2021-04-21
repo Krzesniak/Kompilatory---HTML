@@ -5,17 +5,20 @@ import expression.ExpressionVisitor;
 import expression.Variable;
 import gen.antlr.GrmBaseVisitor;
 import gen.antlr.GrmParser;
+import org.antlr.v4.runtime.Token;
 import org.antlr.v4.runtime.tree.ParseTree;
 
 import java.util.*;
 
 public class HtmlableVisitor extends GrmBaseVisitor<Htmlable> {
     private Map<String, ComponentDefinition> componentDefinitions;
+    private List<String> errors;
 
     private ExpressionVisitor expressionVisitor = new ExpressionVisitor();
 
-    public HtmlableVisitor() {
+    public HtmlableVisitor(List<String> errors) {
         componentDefinitions = new LinkedHashMap<>();
+        this.errors = errors;
     }
 
     @Override
@@ -89,6 +92,10 @@ public class HtmlableVisitor extends GrmBaseVisitor<Htmlable> {
 
     @Override
     public Htmlable visitComponent_definition(GrmParser.Component_definitionContext ctx) {
+        Token idToken = ctx.ID().getSymbol();
+        int line = idToken.getLine();
+        int column = idToken.getCharPositionInLine() + 1;
+
         String componentId = ctx.getChild(0).getText();
 
         ParseTree argsTree = ctx.getChild(2);
@@ -111,6 +118,7 @@ public class HtmlableVisitor extends GrmBaseVisitor<Htmlable> {
 
         if(componentDefinitions.containsKey(componentId)) {
             //TODO error
+            errors.add("Error: component " + componentId + " redefined at (" + line + "," + column + ")");
         }
         else {
             componentDefinitions.put(componentId, definition);

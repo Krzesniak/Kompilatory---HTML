@@ -23,7 +23,12 @@ public class App {
         Program prog = progVisitor.visit(antlrAST);
         prog.htmlDocument.spreadParent();
 
-        System.out.println(prog.htmlDocument.toString());
+        if(!prog.errors.isEmpty()) {
+            for(String err : prog.errors)
+                System.out.println(err);
+        }
+        else
+            System.out.println(prog.htmlDocument.toString());
     }
 
     private static GrmParser getParser(String filename) {
