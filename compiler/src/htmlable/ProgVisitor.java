@@ -3,8 +3,7 @@ package htmlable;
 import gen.antlr.GrmBaseVisitor;
 import gen.antlr.GrmParser;
 
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 public class ProgVisitor extends GrmBaseVisitor<Program> {
     @Override
@@ -13,9 +12,16 @@ public class ProgVisitor extends GrmBaseVisitor<Program> {
         Program prg = new Program();
         prg.errors = errors;
 
-        HtmlableVisitor htmlableVisitor = new HtmlableVisitor(errors);
 
-        htmlableVisitor.visit(ctx.getChild(0));
+        HashMap<String, ComponentDefinition> componentDefinitions = new HashMap();
+        ComponentVisitor1 componentVisitor1 = new ComponentVisitor1(errors, componentDefinitions);
+        componentVisitor1.visit(ctx.getChild(0));
+
+        ComponentVisitor2 componentVisitor2 = new ComponentVisitor2(errors, componentDefinitions);
+        componentVisitor2.visit(ctx.getChild(0));
+
+        HtmlableVisitor htmlableVisitor = new HtmlableVisitor(errors, componentDefinitions);
+        //htmlableVisitor.visit(ctx.getChild(0));
         prg.htmlDocument = (HtmlElement) htmlableVisitor.visit(ctx.getChild(1));
 
         return prg;

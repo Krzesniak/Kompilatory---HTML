@@ -11,13 +11,13 @@ import org.antlr.v4.runtime.tree.ParseTree;
 import java.util.*;
 
 public class HtmlableVisitor extends GrmBaseVisitor<Htmlable> {
-    private Map<String, ComponentDefinition> componentDefinitions;
-    private List<String> errors;
+    Map<String, ComponentDefinition> componentDefinitions;
+    List<String> errors;
 
     private ExpressionVisitor expressionVisitor = new ExpressionVisitor();
 
-    public HtmlableVisitor(List<String> errors) {
-        componentDefinitions = new LinkedHashMap<>();
+    public HtmlableVisitor(List<String> errors, Map<String, ComponentDefinition> componentDefinitions) {
+        this.componentDefinitions = componentDefinitions;
         this.errors = errors;
     }
 
@@ -85,52 +85,16 @@ public class HtmlableVisitor extends GrmBaseVisitor<Htmlable> {
         return each;
     }
 
-    /*@Override
-    public Htmlable visitComponents(GrmParser.ComponentsContext ctx) {
-        return super.visitComponents(ctx);
-    }*/
-
     @Override
-    public Htmlable visitComponent_definition(GrmParser.Component_definitionContext ctx) {
+    public Htmlable visitComponent(GrmParser.ComponentContext ctx) {
         Token idToken = ctx.ID().getSymbol();
         int line = idToken.getLine();
         int column = idToken.getCharPositionInLine() + 1;
 
-        String componentId = ctx.getChild(0).getText();
-
-        ParseTree argsTree = ctx.getChild(2);
-        List<String> argsIds = new LinkedList<>();
-
-        if(argsTree!=null) {
-            for (int i = 0; i < argsTree.getChildCount(); i += 2) {
-                String id = argsTree.getChild(i).getText();
-                argsIds.add(id);
-            }
-        }
-        ComponentDefinition definition = new ComponentDefinition(componentId, argsIds);
-
-        for (int i = 5; i < ctx.getChildCount() - 1; i++) {
-            Htmlable h = visit(ctx.getChild(i));
-            definition.addHtmlable(h);
-        }
-
-        definition.spreadParent();
-
-        if(componentDefinitions.containsKey(componentId)) {
-            //TODO error
-            errors.add("Error: component " + componentId + " redefined at (" + line + "," + column + ")");
-        }
-        else {
-            componentDefinitions.put(componentId, definition);
-        }
-
-        return definition;
-    }
-
-    @Override
-    public Htmlable visitComponent(GrmParser.ComponentContext ctx) {
         String id = ctx.getChild(0).getText();
         ComponentDefinition definition = componentDefinitions.get(id);
+        if(definition == null)
+            errors.add("Error: component " + id + " referenced at (" + line + "," + column + ") doesn't exists");
 
         ParseTree argsTree = ctx.getChild(2);
         LinkedList<Expression> args = new LinkedList<>();

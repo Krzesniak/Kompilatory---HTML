@@ -3,13 +3,10 @@ package htmlable;
 import java.util.List;
 
 public class ComponentDefinition extends Htmlable {
-    private String id;
-    private List<String> argsIds;
+    String id;
+    List<String> argsIds;
 
-    public ComponentDefinition(String id, List<String> argsIds) {
-        this.id = id;
-        this.argsIds = argsIds;
-        System.out.println("ARGS " + argsIds.toString());
+    public ComponentDefinition() {
     }
 
     public int argIndex(String id) {

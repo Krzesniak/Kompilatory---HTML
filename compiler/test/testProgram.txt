@@ -9,9 +9,6 @@ components {
             }
         }
     }
-    compWthArgs {
-
-    }
 
     comp2 (arg1) {
         divComp2 {
@@ -19,19 +16,19 @@ components {
         }
     }
 
+    compOuter(argOut) {
+                divOuter {
+                    p {
+                        $argOut
+                    }
+                    compInner("jakas stala z zewnatrz")
+                    compInner($argOut)
+                }
+            }
+
     compInner (argIn) {
         divInner {
             $argIn
-        }
-    }
-
-    compOuter(argOut) {
-        divOuter {
-            p {
-                $argOut
-            }
-            compInner("jakas stala z zewnatrz")
-            compInner($argOut)
         }
     }
 }

@@ -29,6 +29,8 @@ public class App {
         }
         else
             System.out.println(prog.htmlDocument.toString());
+
+        //System.out.println(prog.htmlDocument.toString());
     }
 
     private static GrmParser getParser(String filename) {

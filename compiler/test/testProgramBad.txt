@@ -1,6 +1,6 @@
 components {
     comp1(){
-
+        referencjaDoNieistniejacegoKomponentu()
     }
     comp1(){}
 }
