@@ -1,7 +1,7 @@
 package expression;
 
 public class VariableReference extends Expression {
-    private String id;
+    private final String id;
 
     public VariableReference(String id) {
         this.id = id;
@@ -9,7 +9,6 @@ public class VariableReference extends Expression {
 
     private Expression getVariable()  {
         return parent.getVariable(id);
-        //return null;
     }
 
     @Override

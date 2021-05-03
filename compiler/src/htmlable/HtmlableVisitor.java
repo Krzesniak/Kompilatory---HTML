@@ -9,6 +9,9 @@ import org.antlr.v4.runtime.Token;
 import org.antlr.v4.runtime.tree.ParseTree;
 
 import java.util.*;
+import java.util.function.Function;
+
+import static java.util.stream.Collectors.toMap;
 
 public class HtmlableVisitor extends GrmBaseVisitor<Htmlable> {
     Map<String, ComponentDefinition> componentDefinitions;
@@ -86,6 +89,23 @@ public class HtmlableVisitor extends GrmBaseVisitor<Htmlable> {
     }
 
     @Override
+    public Htmlable visitSwitche(GrmParser.SwitcheContext ctx) {
+        Expression arg = expressionVisitor.visit(ctx.getChild(2));
+
+        final var switche = new Switch(arg);
+
+        final var htmlable = ctx.children.stream()
+                .skip(5)
+                .takeWhile(it -> !it.getChild(0).getText().equals("else"))
+                .filter(it -> expressionVisitor.visit(it.getChild(0)).equals(arg))
+                .map(caze -> visit(caze.getChild(2)))
+                .findFirst()
+                .orElseGet(() -> visit(ctx.getChild(ctx.getChildCount() - 2).getChild(2)));
+        switche.addHtmlable(htmlable);
+        return switche;
+    }
+
+    @Override
     public Htmlable visitComponent(GrmParser.ComponentContext ctx) {
         Token idToken = ctx.ID().getSymbol();
         int line = idToken.getLine();
@@ -93,7 +113,7 @@ public class HtmlableVisitor extends GrmBaseVisitor<Htmlable> {
 
         String id = ctx.getChild(0).getText();
         ComponentDefinition definition = componentDefinitions.get(id);
-        if(definition == null)
+        if (definition == null)
             errors.add("Error: component " + id + " referenced at (" + line + "," + column + ") doesn't exists");
 
         ParseTree argsTree = ctx.getChild(2);

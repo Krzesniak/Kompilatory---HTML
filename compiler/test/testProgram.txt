@@ -68,6 +68,25 @@ html {
         }
     }
 
+    switch(2+2){
+        2 -> div {}
+        4 -> div {
+         "Div switch"
+         p {
+            "Paragraf switch"
+         }
+        }
+        else -> div {}
+    }
+
+    // switch else
+    switch(1) {
+        2 -> div{}
+        else -> p{
+            "Paragraf w switch else"
+        }
+    }
+
     comp1("c1arg1", "c1arg2")
     comp2("c2arg1")
     compOuter("argOuter")

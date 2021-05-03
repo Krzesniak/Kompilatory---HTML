@@ -38,5 +38,5 @@
 <expression> ::= <variable> | <value> | <condition> | <operation>
 <comment> ::= "//" <ws>* (<strict_string> <ws>*)*
 
-<switch> ::= ("switch" <ws>* "(" <expression> ")" <ws>* "{") <ws>* (<ws>* <switch_line> <ws>* )* <ws>* "}"
+<switch> ::= ("switch" <ws>* "(" <expression> ")" <ws>* "{") <ws>* (<ws>* <switch_line>* <ws>* )* <ws>* "}"
 <switch_line> ::=  <value> <ws>? "->" <ws>* (<html_element> | <value>) | "else -> " <ws>* (<html_element> | <value>)
