@@ -29,6 +29,20 @@ public class ExpressionVisitor extends GrmBaseVisitor<Expression> {
     public Expression visitAdd(GrmParser.AddContext ctx) {
         Expression left = visit(ctx.getChild(0));
         Expression right = visit(ctx.getChild(2));
-        return new Addition(left,right);
+        return new Addition(left, right);
+    }
+
+    @Override
+    public Expression visitEqual(GrmParser.EqualContext ctx) {
+        Expression left = visit(ctx.getChild(0));
+        Expression right = visit(ctx.getChild(2));
+        return new Equals(left, right);
+    }
+
+    @Override
+    public Expression visitModulo(GrmParser.ModuloContext ctx) {
+        Expression left = visit(ctx.getChild(0));
+        Expression right = visit(ctx.getChild(2));
+        return new Modulo(left, right);
     }
 }

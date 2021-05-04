@@ -1,0 +1,30 @@
+components {
+}
+
+html {
+    switch (2 == 2) {
+        1 -> "2 == 2"
+        else -> "2 != 2"
+    }
+
+    switch (1 == 2) {
+        1 -> "1 == 2"
+        else -> "1 != 2"
+    }
+
+    switch ("abc" == "abc") {
+        1 -> "abc == abc"
+        else -> "abc != abc"
+    }
+
+    switch ("abc" == "cba") {
+        1 -> "abc == cba"
+        else -> "abc != cba"
+    }
+
+    switch (5 % 3) {
+        2 -> "5 % 3 = 2"
+        else -> "5 % 3 != 2"
+    }
+}
+
