@@ -12,10 +12,9 @@ repeat : REPEAT LeftParen expr RightParen '{' htmlable* '}';
 
 each : EACH LeftBracket expr_args RightBracket AS ID '{' htmlable* '}';
 
-switche: SWITCH LeftParen expr RightParen '{' switch_line* '}';
-switch_line: expr Arrow htmlable
-            | ELSE Arrow htmlable
-;
+switche: SWITCH LeftParen expr RightParen '{' switch_line* else_line'}';
+switch_line: expr Arrow htmlable;
+else_line: ELSE Arrow htmlable;
 
 element
     : ID args '{' htmlable* '}'                                               #HTML_element

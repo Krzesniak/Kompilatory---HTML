@@ -9,7 +9,7 @@ import org.antlr.v4.runtime.Token;
 import org.antlr.v4.runtime.tree.ParseTree;
 
 import java.util.*;
-import java.util.function.Function;
+import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.toMap;
 
@@ -90,18 +90,14 @@ public class HtmlableVisitor extends GrmBaseVisitor<Htmlable> {
 
     @Override
     public Htmlable visitSwitche(GrmParser.SwitcheContext ctx) {
-        Expression arg = expressionVisitor.visit(ctx.getChild(2));
-
-        final var switche = new Switch(arg);
-
-        final var htmlable = ctx.children.stream()
+        final Expression expression = expressionVisitor.visit(ctx.getChild(2));
+        final Htmlable elseBlock = visit(ctx.getChild(ctx.getChildCount() - 2).getChild(2));
+        final var htmlables = ctx.children.stream()
                 .skip(5)
                 .takeWhile(it -> !it.getChild(0).getText().equals("else"))
-                .filter(it -> expressionVisitor.visit(it.getChild(0)).equals(arg))
-                .map(caze -> visit(caze.getChild(2)))
-                .findFirst()
-                .orElseGet(() -> visit(ctx.getChild(ctx.getChildCount() - 2).getChild(2)));
-        switche.addHtmlable(htmlable);
+                .collect(Collectors.toMap(it -> expressionVisitor.visit(it.getChild(0)), it -> visit(it.getChild(2))));
+        final var switche = new Switch(expression, htmlables, elseBlock);
+
         return switche;
     }
 
