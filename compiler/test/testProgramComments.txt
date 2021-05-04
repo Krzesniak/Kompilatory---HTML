@@ -1,0 +1,35 @@
+components {
+}
+
+html {
+    div {
+        "some div"
+    }
+
+    //komentarz jednoliniowy
+
+    /* dx
+    komentarz dx
+    blokowy
+    /*
+
+    // ds // dx
+    d s
+    dddw
+    */
+
+    /* dx
+        koment dx
+        block
+
+        //d s
+        dddw
+    */
+
+    // komentarz
+
+    div {
+        "cokolwiek"
+    }
+}
+

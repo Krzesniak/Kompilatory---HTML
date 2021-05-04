@@ -88,5 +88,6 @@ VAR_ID : '$' Letter Char*;
 NUMBER : Minus?[1-9] Digit*;
 STRING : DoubleQuote .*? DoubleQuote;
 
+BLOCK_COMMENT :  '/*' .*? '*/' -> skip;
 COMMENT : '//' ~[\r\n]* -> skip;
 WS : [ \r\t\n]+ -> skip;
