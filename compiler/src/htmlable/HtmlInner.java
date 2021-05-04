@@ -1,6 +1,7 @@
 package htmlable;
 
 import expression.Expression;
+import expression.Variable;
 
 public class HtmlInner extends Htmlable {
     Expression expression;
@@ -8,6 +9,12 @@ public class HtmlInner extends Htmlable {
     HtmlInner(Expression expression) {
         expression.parent = this;
         this.expression = expression;
+    }
+
+    @Override
+    public void spreadParent(){
+        expression.parent = this;
+        expression.spreadParent();
     }
 
     @Override

@@ -16,12 +16,12 @@ public class Addition extends Expression {
 
     @Override
     public String stringValue() {
-        return null;
+        return left.stringValue() + right.stringValue();
     }
 
     @Override
     public Type getType() {
-        return Type.INTEGER;
+        return left.getType();
     }
 
     @Override

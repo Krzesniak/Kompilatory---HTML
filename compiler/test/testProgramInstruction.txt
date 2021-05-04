@@ -1,0 +1,17 @@
+components {
+}
+
+html {
+    each ["a", "b", "c"] as var {
+        each ["1", "2", "3"] as var2 {
+            $var + $var2
+        }
+    }
+
+    each ["a", "b", "c"] as var {
+        each [$var + "1", $var + "2", $var + "3"] as var2 {
+            $var2
+        }
+    }
+}
+
