@@ -4,6 +4,7 @@ import gen.antlr.GrmBaseVisitor;
 import gen.antlr.GrmParser;
 
 public class ExpressionVisitor extends GrmBaseVisitor<Expression> {
+
     @Override
     public Expression visitString(GrmParser.StringContext ctx) {
         String text = ctx.getChild(0).getText();
@@ -44,5 +45,10 @@ public class ExpressionVisitor extends GrmBaseVisitor<Expression> {
         Expression left = visit(ctx.getChild(0));
         Expression right = visit(ctx.getChild(2));
         return new Modulo(left, right);
+    }
+
+    @Override
+    public Expression visitExpr_args(GrmParser.Expr_argsContext ctx) {
+        return super.visitExpr_args(ctx);
     }
 }

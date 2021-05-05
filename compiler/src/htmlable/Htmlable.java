@@ -11,12 +11,14 @@ import java.util.Map;
 public abstract class Htmlable {
     List<Htmlable> htmlables;
     Map<String, Variable> variables;
+    Map<String, String> arguments;
 
     public Htmlable parent;
 
     Htmlable() {
         htmlables = new LinkedList<>();
         variables = new LinkedHashMap<>();
+        arguments = new LinkedHashMap<>();
     }
 
     void addHtmlable(Htmlable h) {
@@ -25,6 +27,9 @@ public abstract class Htmlable {
 
     void addVariable(Variable v) {
         variables.put(v.getId(), v);
+    }
+    void addArgument(String key, String value){
+        arguments.put(key, value);
     }
 
     public Expression getVariable(String id)  {

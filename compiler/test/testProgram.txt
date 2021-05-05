@@ -34,8 +34,9 @@ components {
 }
 
 html {
-    div(style="display: none") {
-        p {
+    div(style="display: none; font-size:20px", src="test", dsfds="sdsd") {
+
+        p(style="font-size: 20px") {
             "Huzia na juzia"
             "drugi string w p"
         }

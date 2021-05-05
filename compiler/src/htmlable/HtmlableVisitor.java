@@ -2,6 +2,7 @@ package htmlable;
 
 import expression.Expression;
 import expression.ExpressionVisitor;
+import expression.StringValue;
 import expression.Variable;
 import gen.antlr.GrmBaseVisitor;
 import gen.antlr.GrmParser;
@@ -28,7 +29,10 @@ public class HtmlableVisitor extends GrmBaseVisitor<Htmlable> {
     public Htmlable visitHTML_element(GrmParser.HTML_elementContext ctx) {
         String name = ctx.getChild(0).toString();
 
+
+
         HtmlElement htmlElement = new HtmlElement(name);
+        addArguments(htmlElement, ctx);
 
         for (GrmParser.HtmlableContext hc : ctx.htmlable()) {
             Htmlable h = visit(hc);
@@ -121,5 +125,21 @@ public class HtmlableVisitor extends GrmBaseVisitor<Htmlable> {
         }
 
         return new Component(definition, args);
+    }
+
+    public void addArguments(HtmlElement htmlElement, GrmParser.HTML_elementContext ctx){
+        ParseTree child = ctx.getChild(1);
+        List<ParseTree> children = ((GrmParser.ArgsContext) child).children;
+        if(children != null){
+            for (int i=0; i<children.size(); i++) {
+                if(children.get(i).toString().equals("=")){
+                   String first = children.get(i-1).toString();
+                   String second =children.get(i+1).toString();
+                   htmlElement.addArgument(first, second);
+                }
+            }
+        }
+
+
     }
 }

@@ -10,10 +10,12 @@ import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
 
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 public class App {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         String fileName = args[0];
         GrmParser parser = getParser(fileName);
 
@@ -29,6 +31,8 @@ public class App {
         }
         else
             System.out.println(prog.htmlDocument.toString());
+            String result = prog.htmlDocument.toString();
+        Files.writeString(Paths.get("index.html"), result);
 
         //System.out.println(prog.htmlDocument.toString());
     }
