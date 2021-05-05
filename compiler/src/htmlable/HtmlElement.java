@@ -13,7 +13,7 @@ public class HtmlElement extends Htmlable{
     public String toString() {
         StringBuilder res = new StringBuilder("<" + name );
         String argumentsValue = arguments.entrySet().stream()
-                .map(entry -> entry.getKey() + "=" + entry.getValue())
+                .map(entry -> entry.getKey() + "=\"" + entry.getValue().stringValue()+"\"")
                 .collect(Collectors.joining(" "));
         res.append(" ").append(argumentsValue).append(">\n");
         for(Htmlable h : htmlables)

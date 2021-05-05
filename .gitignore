@@ -2,3 +2,4 @@ out/
 compiler/src/gen
 .idea/
 compiler/.idea/
+compiler/index.html

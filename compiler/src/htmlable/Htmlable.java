@@ -11,7 +11,7 @@ import java.util.Map;
 public abstract class Htmlable {
     List<Htmlable> htmlables;
     Map<String, Variable> variables;
-    Map<String, String> arguments;
+    Map<String, Expression> arguments;
 
     public Htmlable parent;
 
@@ -28,7 +28,7 @@ public abstract class Htmlable {
     void addVariable(Variable v) {
         variables.put(v.getId(), v);
     }
-    void addArgument(String key, String value){
+    void addArgument(String key, Expression value){
         arguments.put(key, value);
     }
 
@@ -48,6 +48,11 @@ public abstract class Htmlable {
         for(Htmlable h : htmlables) {
             h.parent = this;
             h.spreadParent();
+        }
+
+        for(Expression e : arguments.values()) {
+            e.parent = this;
+            e.spreadParent();
         }
     }
 

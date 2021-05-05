@@ -43,7 +43,7 @@ htmlable
 
 expr_args : ( | (expr Comma)* expr);
 id_args : ( | (ID Comma)* ID);
-args: ('(' (ID '=' STRING ','? WS*)* ')')?;
+args: ('(' (ID '=' expr ','? WS*)* ')')?;
 
 
 /*

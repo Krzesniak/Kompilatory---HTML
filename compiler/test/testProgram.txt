@@ -91,4 +91,20 @@ html {
     comp1("c1arg1", "c1arg2")
     comp2("c2arg1")
     compOuter("argOuter")
+
+    h2 { "Striped table" }
+
+    table {
+        each [1, 2, 3, 4, 5, 6, 7, 8, 9] as it
+        {
+            switch($it % 2) {
+                1 -> tr(style="background-color: #ff0000") {
+                     td { "Row 1" }
+                 }
+                else -> tr(style="background-color: #00ffff") {
+                    td { "Row 2" }
+                }
+            }
+        }
+    }
 }
