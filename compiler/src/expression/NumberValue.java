@@ -14,7 +14,7 @@ public class NumberValue extends Expression {
 
     @Override
     public String stringValue() {
-        return "SHOULD THROW ERROR";
+        return String.valueOf(value);
     }
 
     @Override

@@ -1,16 +1,15 @@
 package expression;
 
-public class StringValue extends Expression{
+public class StringValue extends Expression {
     private String value;
 
-    public StringValue(String value){
+    public StringValue(String value) {
         this.value = value;
     }
 
     @Override
-    public int intValue(){
-        //TODO: jakaś obsługa błędów czy coś
-        return -34404;
+    public int intValue() {
+        throw new UnsupportedOperationException(String.format("Cannot cast %s to int!", value));
     }
 
     @Override

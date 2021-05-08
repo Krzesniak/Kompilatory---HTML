@@ -16,10 +16,6 @@ public class ComponentVisitor2 extends HtmlableVisitor{
 
     @Override
     public Htmlable visitComponent_definition(GrmParser.Component_definitionContext ctx) {
-        Token idToken = ctx.ID().getSymbol();
-        int line = idToken.getLine();
-        int column = idToken.getCharPositionInLine() + 1;
-
         String componentId = ctx.getChild(0).getText();
 
         ParseTree argsTree = ctx.getChild(2);
@@ -31,7 +27,6 @@ public class ComponentVisitor2 extends HtmlableVisitor{
                 argsIds.add(id);
             }
         }
-        //ComponentDefinition definition = new ComponentDefinition(componentId, argsIds);
         ComponentDefinition definition = componentDefinitions.get(componentId);
         definition.id = componentId;
         definition.argsIds = argsIds;

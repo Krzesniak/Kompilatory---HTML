@@ -22,9 +22,6 @@ public class Each extends Htmlable {
             switch (arg.getType()) {
                 case STRING -> var.setValue(arg.stringValue());
                 case INTEGER -> var.setValue(arg.intValue());
-                default -> {
-                    //TODO no jakisikej łapani błyndów
-                }
             }
 
             for (Htmlable h : htmlables)

@@ -134,7 +134,6 @@ public class HtmlableVisitor extends GrmBaseVisitor<Htmlable> {
             for (int i=0; i<children.size(); i++) {
                 if(children.get(i).toString().equals("=")){
                    String first = children.get(i-1).toString();
-                   //String second =children.get(i+1).toString();
                    Expression expression =  expressionVisitor.visit(children.get(i+1));
                    htmlElement.addArgument(first, expression);
                 }
