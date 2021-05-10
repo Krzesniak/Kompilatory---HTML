@@ -14,7 +14,7 @@ public class NumberValue extends Expression {
 
     @Override
     public String stringValue() {
-        return String.valueOf(value);
+        throw new UnsupportedOperationException("Cannot cast int to string!");
     }
 
     @Override

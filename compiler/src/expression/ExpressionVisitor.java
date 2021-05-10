@@ -48,6 +48,12 @@ public class ExpressionVisitor extends GrmBaseVisitor<Expression> {
     }
 
     @Override
+    public Expression visitFunString(GrmParser.FunStringContext ctx) {
+        Expression arg = visit(ctx.getChild(1));
+        return new FunString(arg);
+    }
+
+    @Override
     public Expression visitExpr_args(GrmParser.Expr_argsContext ctx) {
         return super.visitExpr_args(ctx);
     }

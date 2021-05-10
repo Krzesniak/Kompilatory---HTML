@@ -25,5 +25,13 @@ public class Switch extends Htmlable {
         super.spreadParent();
         arg.parent = this;
         arg.spreadParent();
+
+        for(Htmlable h : cases.values()) {
+            h.parent = this;
+            h.spreadParent();
+        }
+
+        elseBlock.parent = this;
+        elseBlock.spreadParent();
     }
 }

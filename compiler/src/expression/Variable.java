@@ -26,11 +26,15 @@ public class Variable extends Expression{
 
     @Override
     public int intValue() {
+        if(type != Type.INTEGER)
+            throw new RuntimeException();
         return valInt;
     }
 
     @Override
     public String stringValue() {
+        if(type != Type.STRING)
+            throw new RuntimeException();
         return valString;
     }
 

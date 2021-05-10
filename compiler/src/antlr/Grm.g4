@@ -31,7 +31,8 @@ expr
     | expr Equal expr                                                       #Equal
     | VAR_ID                                                                #Var
     | NUMBER                                                                #Number
-    | STRING                                                                #String;
+    | STRING                                                                #String
+    | 'STRING(' expr ')'                                                    #FunString;
 
 //evaluates to html
 htmlable
