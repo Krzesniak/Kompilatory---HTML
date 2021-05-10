@@ -85,7 +85,7 @@ Minus               : '-';
 ID : Letter Char*;
 VAR_ID : '$' Letter Char*;
 
-NUMBER : Minus?[1-9] Digit*;
+NUMBER : Minus?[1-9] Digit* | '0';
 STRING : DoubleQuote .*? DoubleQuote;
 
 BLOCK_COMMENT :  '/*' .*? '*/' -> skip;
