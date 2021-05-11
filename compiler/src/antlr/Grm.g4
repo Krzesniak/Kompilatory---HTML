@@ -17,7 +17,7 @@ switch_line: expr Arrow htmlable;
 else_line: ELSE Arrow htmlable;
 
 element
-    : ID args '{' htmlable* '}'                                               #HTML_element
+    : ID args '{' code_block? htmlable* '}'                                 #HTML_element
     | expr                                                                  #HTML_inner;
 
 //evaluates to string or integer
@@ -46,6 +46,8 @@ expr_args : ( | (expr Comma)* expr);
 id_args : ( | (ID Comma)* ID);
 args: ('(' (ID '=' expr ','? WS*)* ')')?;
 
+assignment : VAR_ID '=' expr;
+code_block : '<' assignment+ '>';
 
 /*
  * Lexer Rules

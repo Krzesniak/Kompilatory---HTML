@@ -11,6 +11,11 @@ public class HtmlElement extends Htmlable{
 
     @Override
     public String toString() {
+        if(codeBlock != null) {
+            //codeBlock.spreadParent();
+            codeBlock.execute();
+        }
+
         StringBuilder res = new StringBuilder("<" + name );
         String argumentsValue = arguments.entrySet().stream()
                 .map(entry -> entry.getKey() + "=\"" + entry.getValue().stringValue()+"\"")

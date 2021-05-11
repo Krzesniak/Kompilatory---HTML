@@ -1,0 +1,12 @@
+components {
+}
+
+html {
+    <
+        $var = 3
+        $varp1 = $var + 1
+    >
+
+    STRING($varp1)
+}
+

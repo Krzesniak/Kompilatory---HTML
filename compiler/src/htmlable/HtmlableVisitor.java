@@ -1,5 +1,7 @@
 package htmlable;
 
+import codeBlock.CodeBlock;
+import codeBlock.CodeBlockVisitor;
 import expression.Expression;
 import expression.ExpressionVisitor;
 import expression.StringValue;
@@ -19,6 +21,7 @@ public class HtmlableVisitor extends GrmBaseVisitor<Htmlable> {
     List<String> errors;
 
     private ExpressionVisitor expressionVisitor = new ExpressionVisitor();
+    private CodeBlockVisitor codeBlockVisitor = new CodeBlockVisitor();
 
     public HtmlableVisitor(List<String> errors, Map<String, ComponentDefinition> componentDefinitions) {
         this.componentDefinitions = componentDefinitions;
@@ -29,10 +32,13 @@ public class HtmlableVisitor extends GrmBaseVisitor<Htmlable> {
     public Htmlable visitHTML_element(GrmParser.HTML_elementContext ctx) {
         String name = ctx.getChild(0).toString();
 
-
-
         HtmlElement htmlElement = new HtmlElement(name);
         addArguments(htmlElement, ctx);
+
+        CodeBlock codeBlock = null;
+        if(ctx.code_block() != null)
+            codeBlock = codeBlockVisitor.visit(ctx.code_block());
+        htmlElement.codeBlock = codeBlock;
 
         for (GrmParser.HtmlableContext hc : ctx.htmlable()) {
             Htmlable h = visit(hc);

@@ -1,5 +1,6 @@
 package htmlable;
 
+import codeBlock.CodeBlock;
 import expression.Expression;
 import expression.Variable;
 
@@ -12,6 +13,7 @@ public abstract class Htmlable {
     List<Htmlable> htmlables;
     Map<String, Variable> variables;
     Map<String, Expression> arguments;
+    CodeBlock codeBlock;
 
     public Htmlable parent;
 
@@ -25,7 +27,7 @@ public abstract class Htmlable {
         htmlables.add(h);
     }
 
-    void addVariable(Variable v) {
+    public void addVariable(Variable v) {
         variables.put(v.getId(), v);
     }
     void addArgument(String key, Expression value){
@@ -36,10 +38,17 @@ public abstract class Htmlable {
         if(variables.containsKey(id))
             return variables.get(id);
 
+        if(parent == null)
+            return null;
         return parent.getVariable(id);
     }
 
     public void spreadParent(){
+        if(codeBlock != null) {
+            codeBlock.parent = this;
+            codeBlock.spreadParent();
+        }
+
         for(Variable v : variables.values()) {
             v.parent = this;
             v.spreadParent();
