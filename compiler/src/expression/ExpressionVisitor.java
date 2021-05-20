@@ -3,6 +3,9 @@ package expression;
 import gen.antlr.GrmBaseVisitor;
 import gen.antlr.GrmParser;
 
+import java.util.LinkedList;
+import java.util.List;
+
 public class ExpressionVisitor extends GrmBaseVisitor<Expression> {
 
     @Override
@@ -51,6 +54,22 @@ public class ExpressionVisitor extends GrmBaseVisitor<Expression> {
     public Expression visitFunString(GrmParser.FunStringContext ctx) {
         Expression arg = visit(ctx.getChild(1));
         return new FunString(arg);
+    }
+
+    @Override
+    public Expression visitListe(GrmParser.ListeContext ctx) {
+        List<Expression> content = new LinkedList<>();
+        for (int i = 1; i < ctx.getChildCount(); i += 2)
+            content.add(visit(ctx.getChild(i)));
+
+        return new Liste(content);
+    }
+
+    @Override
+    public Expression visitListElement(GrmParser.ListElementContext ctx) {
+        Expression list = visit(ctx.getChild(0));
+        Expression index = visit(ctx.getChild(2));
+        return new ListElement(list,index);
     }
 
     @Override

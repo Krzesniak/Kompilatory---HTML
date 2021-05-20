@@ -37,6 +37,7 @@ public class App {
                 System.out.println(result);
                 Files.writeString(Paths.get("index.html"), result);
             } catch (Exception e) {
+                if (e instanceof RuntimeException) throw (RuntimeException) e;
                 System.out.println(e.getMessage());
             }
         }

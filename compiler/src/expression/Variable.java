@@ -5,6 +5,7 @@ public class Variable extends Expression{
 
     private String valString;
     private int valInt;
+    private Liste valList;
     private Type type;
 
     public Variable(String id) {
@@ -23,6 +24,10 @@ public class Variable extends Expression{
         type = Type.STRING;
         valString = s;
     }
+    public void setValue(Liste liste) {
+        type = Type.LIST;
+        valList = liste;
+    }
 
     @Override
     public int intValue() {
@@ -36,6 +41,13 @@ public class Variable extends Expression{
         if(type != Type.STRING)
             throw new RuntimeException();
         return valString;
+    }
+
+    @Override
+    public Liste listValue() {
+        if(type != Type.LIST)
+            throw new RuntimeException();
+        return valList;
     }
 
     @Override

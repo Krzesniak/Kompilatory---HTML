@@ -1,0 +1,18 @@
+components {
+}
+
+html {
+    <
+        $list = ["zero", "jeden", "dwa"]
+        $zmien = 3
+
+    >
+    STRING( $list)
+
+    each [0,1,2] as it {
+        $list[$it]
+    }
+
+    "end"
+}
+

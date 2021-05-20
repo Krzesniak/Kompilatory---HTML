@@ -25,8 +25,10 @@ public class Assignment {
 
         if(rightSide.getType() == Expression.Type.INTEGER)
             variable.setValue(rightSide.intValue());
-        else
+        else if(rightSide.getType() == Expression.Type.STRING)
             variable.setValue(rightSide.stringValue());
+        else
+            variable.setValue(rightSide.listValue());
     }
 
     public void spreadParent() {

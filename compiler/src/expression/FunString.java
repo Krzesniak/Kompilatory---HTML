@@ -14,7 +14,20 @@ public class FunString extends Expression {
 
     @Override
     public String stringValue() {
-        return Integer.toString(arg.intValue());
+        return stringValue(arg);
+    }
+
+    private String stringValue(Expression arg) {
+        if(arg.getType() == Type.INTEGER)
+            return Integer.toString(arg.intValue());
+        else if(arg.getType() == Type.STRING)
+            return arg.stringValue();
+        else {
+            String res = "[";
+            for(Expression e : arg.listValue().getContent())
+                res += stringValue(e) + ", ";
+            return res + " ]";
+        }
     }
 
     @Override

@@ -5,14 +5,23 @@ import htmlable.Htmlable;
 public abstract class Expression {
     public enum Type {
         INTEGER,
-        STRING
+        STRING,
+        LIST
     }
 
     public Htmlable parent;
 
-    public abstract int intValue();
+    public int intValue() {
+        throw new RuntimeException();
+    }
 
-    public abstract String stringValue();
+    public String stringValue() {
+        throw new RuntimeException();
+    }
+
+    public Liste listValue() {
+        throw new RuntimeException();
+    }
 
     public abstract Type getType();
 

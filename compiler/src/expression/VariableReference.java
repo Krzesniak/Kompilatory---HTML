@@ -7,12 +7,12 @@ public class VariableReference extends Expression {
         this.id = id;
     }
 
-    private Expression getVariable()  {
+    private Expression getVariable() {
         return parent.getVariable(id);
     }
 
     @Override
-    public int intValue()  {
+    public int intValue() {
         return getVariable().intValue();
     }
 
@@ -20,6 +20,9 @@ public class VariableReference extends Expression {
     public String stringValue() {
         return getVariable().stringValue();
     }
+
+    @Override
+    public Liste listValue() {return getVariable().listValue();}
 
     @Override
     public Type getType() {

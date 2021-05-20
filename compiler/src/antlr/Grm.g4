@@ -32,6 +32,8 @@ expr
     | VAR_ID                                                                #Var
     | NUMBER                                                                #Number
     | STRING                                                                #String
+    | '[' (expr ',')* expr ']'                                              #Liste
+    | expr '[' expr ']'                                                     #ListElement
     | 'STRING(' expr ')'                                                    #FunString;
 
 //evaluates to html
