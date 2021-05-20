@@ -16,7 +16,7 @@ public class Each extends Htmlable {
     }
 
     @Override
-    public String toString() {
+    public String eval() {
         StringBuilder res = new StringBuilder();
         for (Expression arg : args) {
             switch (arg.getType()) {

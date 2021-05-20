@@ -25,15 +25,21 @@ public class App {
         Program prog = progVisitor.visit(antlrAST);
         prog.htmlDocument.spreadParent();
 
+
+
         if(!prog.errors.isEmpty()) {
             for(String err : prog.errors)
                 System.out.println(err);
         }
-        else
-            System.out.println(prog.htmlDocument.toString());
-            String result = prog.htmlDocument.toString();
-        Files.writeString(Paths.get("index.html"), result);
-
+        else {
+            try {
+                String result = prog.htmlDocument.eval();
+                System.out.println(result);
+                Files.writeString(Paths.get("index.html"), result);
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+        }
         //System.out.println(prog.htmlDocument.toString());
     }
 

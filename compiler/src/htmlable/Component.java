@@ -32,7 +32,7 @@ public class Component extends Htmlable{
     }
 
     @Override
-    public String toString() {
+    public String eval() {
         definition.parent = this;
         return definition.toString();
     }

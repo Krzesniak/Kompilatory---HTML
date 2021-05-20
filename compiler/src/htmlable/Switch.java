@@ -16,7 +16,7 @@ public class Switch extends Htmlable {
     }
 
     @Override
-    public String toString() {
+    public String eval() {
         return cases.getOrDefault(arg, elseBlock).toString();
     }
 

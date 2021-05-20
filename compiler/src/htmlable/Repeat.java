@@ -2,16 +2,22 @@ package htmlable;
 
 import expression.Expression;
 
-public class Repeat extends Htmlable{
+public class Repeat extends Htmlable {
     private final Expression arg;
+
     public Repeat(Expression arg) {
         this.arg = arg;
     }
+
     @Override
-    public String toString() {
+    public String eval() throws Exception {
         StringBuilder res = new StringBuilder();
-        for(int i = 0; i < arg.intValue(); i++) {
-            for(Htmlable h : htmlables)
+
+        if (arg.getType() != Expression.Type.INTEGER)
+            throw new Exception(String.format("Error at %d, %d. Expected repeat argument to be integer.", line, column));
+
+        for (int i = 0; i < arg.intValue(); i++) {
+            for (Htmlable h : htmlables)
                 res.append(h.toString());
         }
         return res.toString();

@@ -60,6 +60,7 @@ public class HtmlableVisitor extends GrmBaseVisitor<Htmlable> {
     public Htmlable visitRepeat(GrmParser.RepeatContext ctx) {
         Expression arg = expressionVisitor.visit(ctx.getChild(2));
         Repeat repeat = new Repeat(arg);
+        setLineAndColumn(repeat, ctx.REPEAT().getSymbol());
 
         for (GrmParser.HtmlableContext hc : ctx.htmlable()) {
             Htmlable h = visit(hc);
@@ -147,5 +148,13 @@ public class HtmlableVisitor extends GrmBaseVisitor<Htmlable> {
         }
 
 
+    }
+
+    private static void setLineAndColumn(Htmlable htmlable, Token idToken) {
+        int line = idToken.getLine();
+        int column = idToken.getCharPositionInLine() + 1;
+
+        htmlable.line = line;
+        htmlable.column = column;
     }
 }

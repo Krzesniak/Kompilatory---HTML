@@ -15,6 +15,9 @@ public abstract class Htmlable {
     Map<String, Expression> arguments;
     CodeBlock codeBlock;
 
+    public int line;
+    public int column;
+
     public Htmlable parent;
 
     Htmlable() {
@@ -30,41 +33,49 @@ public abstract class Htmlable {
     public void addVariable(Variable v) {
         variables.put(v.getId(), v);
     }
-    void addArgument(String key, Expression value){
+
+    void addArgument(String key, Expression value) {
         arguments.put(key, value);
     }
 
-    public Expression getVariable(String id)  {
-        if(variables.containsKey(id))
+    public Expression getVariable(String id) {
+        if (variables.containsKey(id))
             return variables.get(id);
 
-        if(parent == null)
+        if (parent == null)
             return null;
         return parent.getVariable(id);
     }
 
-    public void spreadParent(){
-        if(codeBlock != null) {
+    public void spreadParent() {
+        if (codeBlock != null) {
             codeBlock.parent = this;
             codeBlock.spreadParent();
         }
 
-        for(Variable v : variables.values()) {
+        for (Variable v : variables.values()) {
             v.parent = this;
             v.spreadParent();
         }
 
-        for(Htmlable h : htmlables) {
+        for (Htmlable h : htmlables) {
             h.parent = this;
             h.spreadParent();
         }
 
-        for(Expression e : arguments.values()) {
+        for (Expression e : arguments.values()) {
             e.parent = this;
             e.spreadParent();
         }
     }
 
-    @Override
-    public abstract String toString();
+    public abstract String eval() throws Exception;
+
+    public String toString() {
+        try {
+            return eval();
+        } catch (Exception e) {
+            return "error";
+        }
+    }
 }

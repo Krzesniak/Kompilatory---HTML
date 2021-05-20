@@ -18,7 +18,7 @@ public class ComponentDefinition extends Htmlable {
     }
 
     @Override
-    public String toString() {
+    public String eval() {
         StringBuilder res = new StringBuilder();
         for(Htmlable h : htmlables)
             res.append(h.toString()).append("\n");

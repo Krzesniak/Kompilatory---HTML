@@ -1,0 +1,9 @@
+components {
+}
+
+html {
+    repeat("xd") {
+        "error argument should be integer"
+    }
+}
+

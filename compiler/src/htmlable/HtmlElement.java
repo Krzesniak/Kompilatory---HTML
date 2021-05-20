@@ -10,7 +10,7 @@ public class HtmlElement extends Htmlable{
     }
 
     @Override
-    public String toString() {
+    public String eval() throws Exception {
         if(codeBlock != null) {
             //codeBlock.spreadParent();
             codeBlock.execute();
@@ -22,7 +22,7 @@ public class HtmlElement extends Htmlable{
                 .collect(Collectors.joining(" "));
         res.append(" ").append(argumentsValue).append(">\n");
         for(Htmlable h : htmlables)
-            res.append(h.toString()).append("\n");
+            res.append(h.eval()).append("\n");
         res.append("</").append(name).append(">\n");
 
         return res.toString();
