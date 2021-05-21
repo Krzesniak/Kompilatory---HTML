@@ -1,0 +1,9 @@
+components {
+}
+html {
+    switch(1) {
+        1 -> div {}
+        "hello" -> div {}
+        else -> div {}
+    }
+}

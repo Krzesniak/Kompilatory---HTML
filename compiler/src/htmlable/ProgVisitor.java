@@ -13,7 +13,7 @@ public class ProgVisitor extends GrmBaseVisitor<Program> {
         prg.errors = errors;
 
 
-        HashMap<String, ComponentDefinition> componentDefinitions = new HashMap();
+        HashMap<String, ComponentDefinition> componentDefinitions = new HashMap<>();
         ComponentVisitor1 componentVisitor1 = new ComponentVisitor1(errors, componentDefinitions);
         componentVisitor1.visit(ctx.getChild(0));
 
@@ -21,7 +21,6 @@ public class ProgVisitor extends GrmBaseVisitor<Program> {
         componentVisitor2.visit(ctx.getChild(0));
 
         HtmlableVisitor htmlableVisitor = new HtmlableVisitor(errors, componentDefinitions);
-        //htmlableVisitor.visit(ctx.getChild(0));
         prg.htmlDocument = (HtmlElement) htmlableVisitor.visit(ctx.getChild(1));
 
         return prg;

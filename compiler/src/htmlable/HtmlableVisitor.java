@@ -102,14 +102,18 @@ public class HtmlableVisitor extends GrmBaseVisitor<Htmlable> {
     @Override
     public Htmlable visitSwitche(GrmParser.SwitcheContext ctx) {
         final Expression expression = expressionVisitor.visit(ctx.getChild(2));
-        final Htmlable elseBlock = visit(ctx.getChild(ctx.getChildCount() - 2).getChild(2));
+        Htmlable elseBlock;
+        try {
+            elseBlock = visit(ctx.getChild(ctx.getChildCount() - 2).getChild(2));
+        } catch(final Exception e) {
+            throw new RuntimeException("Switch expression has to have an else block");
+        }
         final var htmlables = ctx.children.stream()
                 .skip(5)
                 .takeWhile(it -> !it.getChild(0).getText().equals("else"))
                 .collect(Collectors.toMap(it -> expressionVisitor.visit(it.getChild(0)), it -> visit(it.getChild(2))));
-        final var switche = new Switch(expression, htmlables, elseBlock);
 
-        return switche;
+        return new Switch(expression, htmlables, elseBlock);
     }
 
     @Override

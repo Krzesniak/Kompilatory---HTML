@@ -42,4 +42,13 @@ public abstract class Expression {
         final Expression other = (Expression) that;
         return getType() == Type.INTEGER ? this.intValue() == other.intValue() : this.stringValue().equals(other.stringValue());
     }
+
+    @Override
+    public String toString() {
+        try {
+            return stringValue();
+        } catch(Exception e) {
+            return String.valueOf(intValue());
+        }
+    }
 }

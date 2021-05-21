@@ -10,6 +10,11 @@ public class Switch extends Htmlable {
     private final Htmlable elseBlock;
 
     public Switch(Expression arg, Map<Expression, Htmlable> cases, Htmlable elseBlock) {
+        cases.keySet().stream()
+                .filter(it -> !it.getType().equals(arg.getType()))
+                .forEach(it -> {
+                    throw new RuntimeException(String.format("%s is not the same type as %s", it.toString(), arg.toString()));
+                });
         this.arg = arg;
         this.cases = cases;
         this.elseBlock = elseBlock;
@@ -26,7 +31,7 @@ public class Switch extends Htmlable {
         arg.parent = this;
         arg.spreadParent();
 
-        for(Htmlable h : cases.values()) {
+        for (Htmlable h : cases.values()) {
             h.parent = this;
             h.spreadParent();
         }
