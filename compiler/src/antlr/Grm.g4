@@ -1,7 +1,7 @@
 grammar Grm;
 
 //Start
-prog: components element EOF                                               #Program;
+prog: components* element EOF                                               #Program;
 
 components : COMPONENTS '{' component_definition* '}';
 component_definition : ID ('(' id_args ')')? '{' htmlable* '}';

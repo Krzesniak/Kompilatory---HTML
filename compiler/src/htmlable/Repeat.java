@@ -10,11 +10,11 @@ public class Repeat extends Htmlable {
     }
 
     @Override
-    public String eval() throws Exception {
+    public String eval() {
         StringBuilder res = new StringBuilder();
 
         if (arg.getType() != Expression.Type.INTEGER)
-            throw new Exception(String.format("Error at %d, %d. Expected repeat argument to be integer.", line, column));
+            throw new RuntimeException(String.format("Error at %d, %d. Expected repeat argument to be integer.", line, column));
 
         for (int i = 0; i < arg.intValue(); i++) {
             for (Htmlable h : htmlables)
