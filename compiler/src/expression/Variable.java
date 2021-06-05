@@ -39,7 +39,7 @@ public class Variable extends Expression{
     @Override
     public String stringValue() {
         if(type != Type.STRING)
-            throw new RuntimeException();
+            throw new RuntimeException(String.format("%s is not a string", id));
         return valString;
     }
 

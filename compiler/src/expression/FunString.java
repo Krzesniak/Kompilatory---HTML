@@ -23,9 +23,9 @@ public class FunString extends Expression {
         else if(arg.getType() == Type.STRING)
             return arg.stringValue();
         else {
-            String res = "[";
+            StringBuilder res = new StringBuilder("[");
             for(Expression e : arg.listValue().getContent())
-                res += stringValue(e) + ", ";
+                res.append(stringValue(e)).append(", ");
             return res + " ]";
         }
     }

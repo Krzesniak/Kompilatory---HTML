@@ -5,8 +5,13 @@ html {
     <
         $var = 3
         $varp1 = $var + 1
+        $vars = "hello"
     >
 
     STRING($varp1)
+
+    "hello" + STRING($var)
+
+    "hello" + $var
 }
 
