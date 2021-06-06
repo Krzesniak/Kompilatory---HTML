@@ -12,11 +12,11 @@ public abstract class Expression {
     public Htmlable parent;
 
     public int intValue() {
-        throw new RuntimeException();
+        throw new UnsupportedOperationException();
     }
 
     public String stringValue() {
-        throw new RuntimeException();
+        throw new UnsupportedOperationException();
     }
 
     public Liste listValue() {

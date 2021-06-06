@@ -1,6 +1,6 @@
 package expression;
 
-public class Variable extends Expression{
+public class Variable extends Expression {
     String id;
 
     private String valString;
@@ -12,18 +12,20 @@ public class Variable extends Expression{
         this.id = id;
     }
 
-    public String getId(){
+    public String getId() {
         return id;
     }
 
-    public void setValue(int i){
+    public void setValue(int i) {
         type = Type.INTEGER;
         valInt = i;
     }
+
     public void setValue(String s) {
         type = Type.STRING;
         valString = s;
     }
+
     public void setValue(Liste liste) {
         type = Type.LIST;
         valList = liste;
@@ -31,22 +33,22 @@ public class Variable extends Expression{
 
     @Override
     public int intValue() {
-        if(type != Type.INTEGER)
-            throw new RuntimeException();
+        if (type != Type.INTEGER)
+            throw new RuntimeException(String.format("%s is not a number", id));
         return valInt;
     }
 
     @Override
     public String stringValue() {
-        if(type != Type.STRING)
+        if (type != Type.STRING)
             throw new RuntimeException(String.format("%s is not a string", id));
         return valString;
     }
 
     @Override
     public Liste listValue() {
-        if(type != Type.LIST)
-            throw new RuntimeException();
+        if (type != Type.LIST)
+            throw new RuntimeException(String.format("%s is not a list", id));
         return valList;
     }
 

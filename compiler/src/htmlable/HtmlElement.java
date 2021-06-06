@@ -10,9 +10,8 @@ public class HtmlElement extends Htmlable{
     }
 
     @Override
-    public String eval() throws Exception {
+    public String eval() {
         if(codeBlock != null) {
-            //codeBlock.spreadParent();
             codeBlock.execute();
         }
 

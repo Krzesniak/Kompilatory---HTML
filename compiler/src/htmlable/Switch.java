@@ -13,7 +13,7 @@ public class Switch extends Htmlable {
         cases.keySet().stream()
                 .filter(it -> !it.getType().equals(arg.getType()))
                 .forEach(it -> {
-                    throw new RuntimeException(String.format("%s is not the same type as %s", it.toString(), arg.toString()));
+                    throw new RuntimeException(String.format("Error at: %s, %s. %s is not the same type as %s", line, column, it.toString(), arg.toString()));
                 });
         this.arg = arg;
         this.cases = cases;

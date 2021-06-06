@@ -69,13 +69,9 @@ public abstract class Htmlable {
         }
     }
 
-    public abstract String eval() throws Exception;
+    public abstract String eval();
 
     public String toString() {
-        try {
-            return eval();
-        } catch (Exception e) {
-            return "error";
-        }
+        return eval();
     }
 }

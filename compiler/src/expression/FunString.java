@@ -9,7 +9,7 @@ public class FunString extends Expression {
 
     @Override
     public int intValue() {
-        throw new RuntimeException();
+        throw new RuntimeException("STRING function is not a number");
     }
 
     @Override
