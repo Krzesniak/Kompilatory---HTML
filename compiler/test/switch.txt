@@ -1,3 +1,6 @@
+components {
+
+}
 
 html {
     switch(1) {

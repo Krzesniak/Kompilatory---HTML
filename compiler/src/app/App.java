@@ -22,10 +22,15 @@ public class App {
         ParseTree antlrAST = parser.prog();
 
         ProgVisitor progVisitor = new ProgVisitor();
-        Program prog = progVisitor.visit(antlrAST);
+        Program prog;
+        try { //można to inaczej rozwiązać. Skoro coś wyrzuca error w czasie wizytacji to można po prostu dodać komunikat błędy do listy i puścić wizytora dalej.
+            prog = progVisitor.visit(antlrAST);
+        } catch (ProgramException e) {
+            System.out.println(e.getMessage());
+            return;
+        }
+
         prog.htmlDocument.spreadParent();
-
-
 
         if(!prog.errors.isEmpty()) {
             for(String err : prog.errors)
@@ -36,8 +41,7 @@ public class App {
                 String result = prog.htmlDocument.eval();
                 System.out.println(result);
                 Files.writeString(Paths.get("index.html"), result);
-            } catch (Exception e) {
-                if (e instanceof RuntimeException) throw (RuntimeException) e;
+            } catch (ProgramException e) {
                 System.out.println(e.getMessage());
             }
         }
