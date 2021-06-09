@@ -114,10 +114,17 @@ html {
             h2(class="text-center mt-0"){"At Your Service" }
             hr(class="divider my-4"){ }
             div(class="row"){
-                        service("fa-gem", "Sturdy Themes", "Our themes are updated regularly to keep them bug free!")
-                        service("fa-laptop-code", "Up to Date", "All dependencies are kept current to keep things fresh.")
-                        service("fa-globe", "Ready to Publish", "You can use this design as is, or you can make changes!")
-                        service("fa-heart", "Made with Love", "Is it really open source if it's not made with love?")
+            <
+             $icons  =  ["fa-gem", "fa-laptop-code", "fa-globe", "fa-heart"]
+             $titles = ["Sturdy Themes", "Up to Date", "Ready to Publish", "Made with Love"]
+             $descriptions = ["Our themes are updated regularly to keep them bug free!",
+                             "All dependencies are kept current to keep things fresh.",
+                             "You can use this design as is, or you can make changes!",
+                             "Made with Love", "Is it really open source if it's not made with love?"]
+            >
+            each [0,1,2,3] as it {
+                     service($icons[$it], $titles[$it], $descriptions[$it])
+                }
            }
         }
       }
