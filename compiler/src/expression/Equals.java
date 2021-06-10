@@ -12,6 +12,7 @@ public class Equals extends Expression {
     @Override
     public int intValue() {
         boolean result = false;
+        if (!left.getType().equals(right.getType())) return 0;
         switch (left.getType()) {
             case INTEGER -> result = (left.intValue() == right.intValue());
             case STRING -> result = (left.stringValue().equals(right.stringValue()));

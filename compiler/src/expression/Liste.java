@@ -30,7 +30,16 @@ public class Liste extends Expression{
         }
     }
 
+    public int getSize() {
+        return content.size();
+    }
+
     public Expression getElement(Expression expression) {
         return content.get(expression.intValue());
+    }
+
+    @Override
+    public String toString() {
+        return content.toString();
     }
 }

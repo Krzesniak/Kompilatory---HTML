@@ -1,0 +1,13 @@
+components {
+
+}
+
+html {
+    <
+    $var=5
+    $varList=[1,2,3]
+    >
+    $var
+    $varList
+
+}

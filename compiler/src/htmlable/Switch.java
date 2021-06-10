@@ -14,7 +14,7 @@ public class Switch extends Htmlable {
         cases.keySet().stream()
                 .filter(it -> !it.getType().equals(arg.getType()))
                 .forEach(it -> {
-                    throw new ProgramException(String.format("Error at: %s, %s. %s is not the same type as %s", line, column, it.toString(), arg.toString()));
+                    throw new ProgramException(String.format("Error at: %s, %s. Switch case %s is not the same type as the argument %s", line, column, it.toString(), arg.toString()));
                 });
         this.arg = arg;
         this.cases = cases;

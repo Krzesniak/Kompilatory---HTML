@@ -37,7 +37,7 @@ public class HtmlableVisitor extends GrmBaseVisitor<Htmlable> {
         addArguments(htmlElement, ctx);
 
         CodeBlock codeBlock = null;
-        if(ctx.code_block() != null)
+        if (ctx.code_block() != null)
             codeBlock = codeBlockVisitor.visit(ctx.code_block());
         htmlElement.codeBlock = codeBlock;
 
@@ -110,8 +110,8 @@ public class HtmlableVisitor extends GrmBaseVisitor<Htmlable> {
         Htmlable elseBlock;
         try {
             elseBlock = visit(ctx.getChild(ctx.getChildCount() - 2).getChild(2));
-        } catch(final Exception e) {
-            throw new ProgramException("Switch expression has to have an else block");
+        } catch (final Exception e) {
+            throw new ProgramException(String.format("Error at %d,%d. Switch expression has to have an else block", line, column));
         }
         final var htmlables = ctx.children.stream()
                 .skip(5)
@@ -143,15 +143,15 @@ public class HtmlableVisitor extends GrmBaseVisitor<Htmlable> {
         return new Component(definition, args);
     }
 
-    public void addArguments(HtmlElement htmlElement, GrmParser.HTML_elementContext ctx){
+    public void addArguments(HtmlElement htmlElement, GrmParser.HTML_elementContext ctx) {
         ParseTree child = ctx.getChild(1);
         List<ParseTree> children = ((GrmParser.ArgsContext) child).children;
-        if(children != null){
-            for (int i=0; i<children.size(); i++) {
-                if(children.get(i).toString().equals("=")){
-                   String first = children.get(i-1).toString();
-                   Expression expression =  expressionVisitor.visit(children.get(i+1));
-                   htmlElement.addArgument(first, expression);
+        if (children != null) {
+            for (int i = 0; i < children.size(); i++) {
+                if (children.get(i).toString().equals("=")) {
+                    String first = children.get(i - 1).toString();
+                    Expression expression = expressionVisitor.visit(children.get(i + 1));
+                    htmlElement.addArgument(first, expression);
                 }
             }
         }

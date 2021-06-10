@@ -9,7 +9,7 @@ public class StringValue extends Expression {
 
     @Override
     public int intValue() {
-        throw new UnsupportedOperationException(String.format("Cannot cast %s to int!", value));
+        throw new RuntimeException(String.format("Cannot cast %s to int!", value));
     }
 
     @Override

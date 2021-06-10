@@ -1,5 +1,7 @@
 package expression;
 
+import app.ProgramException;
+
 public class Modulo extends Expression {
     private Expression left;
     private Expression right;
@@ -11,6 +13,8 @@ public class Modulo extends Expression {
 
     @Override
     public int intValue() {
+        if (left.getType() != Type.INTEGER || right.getType() != Type.INTEGER)
+            throw new ProgramException(String.format("Error at %d,%d. Cannot perform modulo operation on non integers", parent.line, parent.column));
         return left.intValue() % right.intValue();
     }
 
