@@ -11,6 +11,8 @@ public class Switch extends Htmlable {
     private final Htmlable elseBlock;
 
     public Switch(Expression arg, Map<Expression, Htmlable> cases, Htmlable elseBlock, int line, int column) {
+        this.line=line;
+        this.column=column;
         cases.keySet().stream()
                 .filter(it -> !it.getType().equals(arg.getType()))
                 .forEach(it -> {

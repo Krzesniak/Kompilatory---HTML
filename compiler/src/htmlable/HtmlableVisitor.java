@@ -34,6 +34,8 @@ public class HtmlableVisitor extends GrmBaseVisitor<Htmlable> {
         String name = ctx.getChild(0).toString();
 
         HtmlElement htmlElement = new HtmlElement(name);
+        setLineAndColumn(htmlElement,ctx.ID().getSymbol());
+
         addArguments(htmlElement, ctx);
 
         CodeBlock codeBlock = null;
@@ -45,8 +47,6 @@ public class HtmlableVisitor extends GrmBaseVisitor<Htmlable> {
             Htmlable h = visit(hc);
             if (h != null)
                 htmlElement.addHtmlable(h);
-            else
-                System.out.println("why null");
         }
         return htmlElement;
     }
@@ -54,7 +54,9 @@ public class HtmlableVisitor extends GrmBaseVisitor<Htmlable> {
     @Override
     public Htmlable visitHTML_inner(GrmParser.HTML_innerContext ctx) {
         Expression expression = expressionVisitor.visit(ctx.getChild(0));
-        return new HtmlInner(expression);
+        final var htmlInner= new HtmlInner(expression);
+        setLineAndColumn(htmlInner,ctx.getStart());
+        return htmlInner ;
     }
 
     @Override
@@ -67,8 +69,6 @@ public class HtmlableVisitor extends GrmBaseVisitor<Htmlable> {
             Htmlable h = visit(hc);
             if (h != null)
                 repeat.addHtmlable(h);
-            else
-                System.out.println("why null");
         }
 
         return repeat;
@@ -93,8 +93,6 @@ public class HtmlableVisitor extends GrmBaseVisitor<Htmlable> {
             Htmlable h = visit(ctx.getChild(i));
             if (h != null)
                 each.addHtmlable(h);
-            else
-                System.out.println("why null");
         }
 
         return each;

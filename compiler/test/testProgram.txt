@@ -99,10 +99,10 @@ html {
         {
             switch($it % 2) {
                 0 -> tr(style="background-color: #ff0000") {
-                     td { "Row " + STRING($it) }
+                     td { "Row " + $it }
                  }
                 else -> tr(style="background-color: #00ffff") {
-                    td { "Row " + STRING($it)  }
+                    td { "Row " + $it  }
                 }
             }
         }

@@ -3,11 +3,26 @@ components {
 }
 
 html {
-    <
-    $var=5
-    $varList=[1,2,3]
-    >
-    $var
-    $varList
+<
+$var=2+2
+$var2=4
+>
+div {
+}
+
+each [1,2,3,4,5,6] as var {
+"Row: " + $var
+}
+    switch(2+2) {
+        4 -> div{
+        "In here" + STRING(2)
+        }
+        else -> div{}
+    }
+
+    "Hello "+ STRING(2)
+
+   STRING(2+2)
+   STRING($var+$var2)
 
 }
