@@ -37,6 +37,7 @@ public class ListElement extends Expression {
         this.index.spreadParent();
 
         this.liste.parent = parent;
+        this.liste.spreadParent();
     }
 
     private Expression getElement() {

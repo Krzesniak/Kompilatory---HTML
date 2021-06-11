@@ -6,12 +6,17 @@ html {
         $list = ["zero", "jeden", "dwa"]
         $zmien = 3
 
+        $matrix = [["A","B"], ["C","D"]]
     >
     STRING( $list)
 
+    "iteracja: "
     each [0,1,2] as it {
         $list[$it]
     }
+
+    "wyłuskanie macierzy: "
+    $matrix[0][1]
 
     "end"
 }

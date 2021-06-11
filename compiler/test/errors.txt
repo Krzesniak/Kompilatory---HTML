@@ -80,4 +80,5 @@ each [1,2,3,4,5,6] as var {
    //comp("za_malo_argumentow") //TODO FIX
 
     //c1() //TODO co w przypadku stackoverflow
+    //TODO error gdy podany plik nie istnieje
 }
