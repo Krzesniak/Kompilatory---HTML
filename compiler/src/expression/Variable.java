@@ -1,5 +1,7 @@
 package expression;
 
+import app.ProgramException;
+
 public class Variable extends Expression {
     String id;
 
@@ -34,7 +36,7 @@ public class Variable extends Expression {
     @Override
     public int intValue() {
         if (type != Type.INTEGER)
-            throw new RuntimeException(String.format("%s is not a number", id));
+            throw new ProgramException(parent.line, parent.column, String.format("%s is not a number", id));
         return valInt;
     }
 

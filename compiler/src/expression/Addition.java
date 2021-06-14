@@ -1,5 +1,8 @@
 package expression;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Addition extends Expression {
     private Expression left;
     private Expression right;
@@ -16,7 +19,22 @@ public class Addition extends Expression {
 
     @Override
     public String stringValue() {
-        return left.stringValue() + right.stringValue();
+        return switch (left.getType()) {
+            case INTEGER -> Integer.toString(left.intValue() + right.intValue());
+            case LIST -> listValue().stringValue();
+            case STRING -> left.stringValue() + right.stringValue();
+        };
+    }
+
+    @Override
+    public Liste listValue() {
+        ArrayList<Expression> content = new ArrayList<>(left.listValue().getContent());
+        if (right.getType() != Type.LIST) {
+            content.add(right);
+        } else {
+            content.addAll(right.listValue().getContent());
+        }
+        return new Liste(content);
     }
 
     @Override

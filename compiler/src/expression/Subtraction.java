@@ -22,6 +22,11 @@ public class Subtraction extends Expression {
     }
 
     @Override
+    public Liste listValue() {
+        throw new ProgramException(parent.line, parent.column, "Cannot substract lists");
+    }
+
+    @Override
     public Expression.Type getType() {
         return left.getType();
     }

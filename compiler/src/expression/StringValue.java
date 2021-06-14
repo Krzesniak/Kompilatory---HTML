@@ -1,5 +1,7 @@
 package expression;
 
+import app.ProgramException;
+
 public class StringValue extends Expression {
     private String value;
 
@@ -9,7 +11,7 @@ public class StringValue extends Expression {
 
     @Override
     public int intValue() {
-        throw new RuntimeException(String.format("Cannot cast %s to int!", value));
+        throw new ProgramException(parent.line, parent.column, String.format("Cannot cast %s to int!", value));
     }
 
     @Override

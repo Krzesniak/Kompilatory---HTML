@@ -18,16 +18,16 @@ public class FunString extends Expression {
     }
 
     private String stringValue(Expression arg) {
-        if(arg.getType() == Type.INTEGER)
-            return Integer.toString(arg.intValue());
-        else if(arg.getType() == Type.STRING)
-            return arg.stringValue();
-        else {
-            StringBuilder res = new StringBuilder("[");
-            for(Expression e : arg.listValue().getContent())
-                res.append(stringValue(e)).append(", ");
-            return res + " ]";
-        }
+        return switch (arg.getType()) {
+            case STRING -> arg.stringValue();
+            case INTEGER -> Integer.toString(arg.intValue());
+            case LIST -> {
+                StringBuilder res = new StringBuilder("[");
+                for (Expression e : arg.listValue().getContent())
+                    res.append(stringValue(e)).append(", ");
+                yield res + " ]";
+            }
+        };
     }
 
     @Override

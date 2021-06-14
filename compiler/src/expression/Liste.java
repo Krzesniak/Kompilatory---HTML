@@ -2,7 +2,7 @@ package expression;
 
 import java.util.List;
 
-public class Liste extends Expression{
+public class Liste extends Expression {
     private final List<Expression> content;
 
     Liste(List<Expression> content) {
@@ -15,6 +15,11 @@ public class Liste extends Expression{
     }
 
     @Override
+    public String stringValue() {
+        return toString();
+    }
+
+    @Override
     public Type getType() {
         return Type.LIST;
     }
@@ -23,8 +28,9 @@ public class Liste extends Expression{
         return content;
     }
 
-    @Override public void spreadParent(){
-        for(Expression e : content) {
+    @Override
+    public void spreadParent() {
+        for (Expression e : content) {
             e.parent = parent;
             e.spreadParent();
         }

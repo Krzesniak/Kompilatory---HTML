@@ -22,6 +22,11 @@ public class Multiplication extends Expression {
     }
 
     @Override
+    public Liste listValue() {
+        throw new ProgramException(parent.line, parent.column, "Cannot multiplicate lists");
+    }
+
+    @Override
     public Type getType() {
         return left.getType();
     }
