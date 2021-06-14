@@ -1,13 +1,13 @@
 package app;
 
-import htmlable.ProgVisitor;
-import htmlable.Program;
 import gen.antlr.GrmLexer;
 import gen.antlr.GrmParser;
-import org.antlr.v4.runtime.tree.ParseTree;
+import htmlable.ProgVisitor;
+import htmlable.Program;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
+import org.antlr.v4.runtime.tree.ParseTree;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -16,6 +16,10 @@ import java.nio.file.Paths;
 public class App {
 
     public static void main(String[] args) throws IOException {
+        if (args.length == 0 || !Files.exists(Paths.get(args[0]))) {
+            System.out.println("Please provide a valid file path");
+            return;
+        }
         String fileName = args[0];
         GrmParser parser = getParser(fileName);
 
@@ -23,20 +27,18 @@ public class App {
 
         ProgVisitor progVisitor = new ProgVisitor();
         Program prog;
-        try { //można to inaczej rozwiązać. Skoro coś wyrzuca error w czasie wizytacji to można po prostu dodać komunikat błędy do listy i puścić wizytora dalej.
+        try {
             prog = progVisitor.visit(antlrAST);
         } catch (ProgramException e) {
             System.out.println(e.getMessage());
             return;
         }
-
         prog.htmlDocument.spreadParent();
 
-        if(!prog.errors.isEmpty()) {
-            for(String err : prog.errors)
+        if (!prog.errors.isEmpty()) {
+            for (String err : prog.errors)
                 System.out.println(err);
-        }
-        else {
+        } else {
             try {
                 String result = prog.htmlDocument.eval();
                 System.out.println(result);

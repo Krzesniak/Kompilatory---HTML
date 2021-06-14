@@ -1,5 +1,6 @@
 package expression;
 
+import app.ProgramException;
 import htmlable.Htmlable;
 
 public abstract class Expression {
@@ -20,7 +21,7 @@ public abstract class Expression {
     }
 
     public Liste listValue() {
-        throw new RuntimeException();
+        throw new ProgramException(parent.line,parent.column, "Variable is not a list");
     }
 
     public abstract Type getType();

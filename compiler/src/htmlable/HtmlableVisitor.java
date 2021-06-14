@@ -88,6 +88,7 @@ public class HtmlableVisitor extends GrmBaseVisitor<Htmlable> {
         }
 
         Each each = new Each(var, args);
+        setLineAndColumn(each, ctx.EACH().getSymbol());
 
         for (int i = 7; i < ctx.getChildCount() - 1; i++) {
             Htmlable h = visit(ctx.getChild(i));

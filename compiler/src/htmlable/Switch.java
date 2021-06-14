@@ -11,8 +11,8 @@ public class Switch extends Htmlable {
     private final Htmlable elseBlock;
 
     public Switch(Expression arg, Map<Expression, Htmlable> cases, Htmlable elseBlock, int line, int column) {
-        this.line=line;
-        this.column=column;
+        this.line = line;
+        this.column = column;
         cases.keySet().stream()
                 .filter(it -> !it.getType().equals(arg.getType()))
                 .forEach(it -> {
@@ -34,6 +34,10 @@ public class Switch extends Htmlable {
         arg.parent = this;
         arg.spreadParent();
 
+        for (var expr : cases.keySet()) {
+            expr.parent = this;
+            expr.spreadParent();
+        }
         for (Htmlable h : cases.values()) {
             h.parent = this;
             h.spreadParent();

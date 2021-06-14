@@ -43,7 +43,7 @@ each [1,2,3,4,5,6] as var {
        >
            //"wyłuskanie nie intem " + $arr["xd"]
 
-           //"wyłuskanie nietablicy " + $nietablica[3] //TODO FIX
+           //"wyłuskanie nietablicy " + $nietablica[3]
 
            //"out of bounds " + $arr[5] //TODO FIX
 
@@ -61,7 +61,7 @@ each [1,2,3,4,5,6] as var {
 
 
            "odejmowanie 5-3= " + STRING(5 - 3)
-           "mnozenie 5*3= " + STRING(5 * 3) //TODO zły wynik
+           "mnozenie 5*3= " + STRING(5 * 3)
            "wiekszy 11 > 2= " + STRING(11 > 2) //TODO zły wynik
            "mniejszy 11 < 2= " + STRING(11 < 2) //TODO zły wynik
 
@@ -75,11 +75,11 @@ each [1,2,3,4,5,6] as var {
            //     else -> "niejeden"
            //}
 
-           //each [$liczba, $nieistniejaca] as var { //TODO error at 0,0
-           // "liczba: " + $var
+           //each [$liczba, $nieistniejaca] as var {
+            // "liczba: " + $var
            //}
 
-           //$arr //TODO FIX
+           $arr
    }
 
    //repeat("nieliczba") {
@@ -90,6 +90,5 @@ each [1,2,3,4,5,6] as var {
 
    //comp("za_malo_argumentow") //TODO FIX
 
-    //c1() //TODO co w przypadku stackoverflow
-    //TODO error gdy podany plik nie istnieje
+    //c1() //co w przypadku stackoverflow, tu ciezko cos zmienic bo errora nie obsluzysz
 }

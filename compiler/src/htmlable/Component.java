@@ -1,5 +1,6 @@
 package htmlable;
 
+import app.ProgramException;
 import expression.Expression;
 
 import java.util.List;
@@ -9,6 +10,9 @@ public class Component extends Htmlable{
     private final List<Expression> args;
 
     public Component(ComponentDefinition definition, List<Expression> args){
+        if(definition.argsIds.size()>args.size()){
+            throw new ProgramException(parent.line, parent.column, "Too little arguments");
+        }
         this.definition = definition;
         this.args = args;
     }

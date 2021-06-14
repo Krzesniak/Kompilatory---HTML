@@ -1,10 +1,11 @@
 package htmlable;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ComponentDefinition extends Htmlable {
     String id;
-    List<String> argsIds;
+    List<String> argsIds= new ArrayList<>();
 
     public ComponentDefinition() {
     }

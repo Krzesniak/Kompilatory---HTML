@@ -20,7 +20,7 @@ public class Modulo extends Expression {
 
     @Override
     public String stringValue() {
-        return null;
+        throw new ProgramException(parent.line, parent.column, "Cannot perform modulo operation on strings");
     }
 
     @Override
