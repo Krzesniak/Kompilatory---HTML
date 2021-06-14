@@ -47,7 +47,7 @@ each [1,2,3,4,5,6] as var {
 
            //"out of bounds " + $arr[5] //TODO FIX
 
-           //"nielegalna_operacja" % 2 //TODO FIX
+           //"nielegalna_operacja" % 2
            $arr + $arr //TODO powinno wyrzucić błąd
            //$arr - $arr //TODO zła wiadomość błędu, to nie są stringi
            //$arr + 3 //TODO zła wiadomość błędu
@@ -62,9 +62,8 @@ each [1,2,3,4,5,6] as var {
 
            "odejmowanie 5-3= " + STRING(5 - 3)
            "mnozenie 5*3= " + STRING(5 * 3)
-           "wiekszy 11 > 2= " + STRING(11 > 2) //TODO zły wynik
-           "mniejszy 11 < 2= " + STRING(11 < 2) //TODO zły wynik
-
+           "wiekszy 11 > 2= " + STRING(11 > 2)
+           "mniejszy 11 < 2= " + STRING(11 < 2)
            //switch(4) { //TODO FIX
            //    $liczba -> "jeden"
            //    else -> "niejeden"

@@ -65,6 +65,20 @@ public class ExpressionVisitor extends GrmBaseVisitor<Expression> {
     }
 
     @Override
+    public Expression visitGreater(GrmParser.GreaterContext ctx) {
+        Expression left = visit(ctx.getChild(0));
+        Expression right = visit(ctx.getChild(2));
+        return new GreaterThan(left, right);
+    }
+
+    @Override
+    public Expression visitLess(GrmParser.LessContext ctx) {
+        Expression left = visit(ctx.getChild(0));
+        Expression right = visit(ctx.getChild(2));
+        return new LessThan(left, right);
+    }
+
+    @Override
     public Expression visitFunString(GrmParser.FunStringContext ctx) {
         Expression arg = visit(ctx.getChild(1));
         return new FunString(arg);
@@ -83,7 +97,7 @@ public class ExpressionVisitor extends GrmBaseVisitor<Expression> {
     public Expression visitListElement(GrmParser.ListElementContext ctx) {
         Expression list = visit(ctx.getChild(0));
         Expression index = visit(ctx.getChild(2));
-        return new ListElement(list,index);
+        return new ListElement(list, index);
     }
 
     @Override
