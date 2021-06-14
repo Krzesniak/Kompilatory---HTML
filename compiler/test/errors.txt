@@ -48,6 +48,17 @@ each [1,2,3,4,5,6] as var {
            //"out of bounds " + $arr[5] //TODO FIX
 
            //"nielegalna_operacja" % 2 //TODO FIX
+           $arr + $arr //TODO powinno wyrzucić błąd
+           //$arr - $arr //TODO zła wiadomość błędu, to nie są stringi
+           //$arr + 3 //TODO zła wiadomość błędu
+           //3 //TODO zła wiadomość błędu
+           //STRING($arr + $arr) //TODO FIX
+           //STRING($arr * $arr) //TODO FIX
+           //STRING($arr - $arr) //TODO FIX
+           //STRING(3 - $arr) //TODO FIX
+           //STRING(3 + $arr) //TODO FIX
+           //STRING(3 * "xd") //TODO FIX
+
 
            "odejmowanie 5-3= " + STRING(5 - 3)
            "mnozenie 5*3= " + STRING(5 * 3) //TODO zły wynik
