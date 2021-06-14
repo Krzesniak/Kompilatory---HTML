@@ -49,7 +49,7 @@ each [1,2,3,4,5,6] as var {
 
            //"nielegalna_operacja" % 2 //TODO FIX
 
-           "odejmowanie 5-3= " + STRING(5 - 3) //TODO zły wynik
+           "odejmowanie 5-3= " + STRING(5 - 3)
            "mnozenie 5*3= " + STRING(5 * 3) //TODO zły wynik
            "wiekszy 11 > 2= " + STRING(11 > 2) //TODO zły wynik
            "mniejszy 11 < 2= " + STRING(11 < 2) //TODO zły wynik

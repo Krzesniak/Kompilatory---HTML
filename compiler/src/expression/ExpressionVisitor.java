@@ -37,6 +37,13 @@ public class ExpressionVisitor extends GrmBaseVisitor<Expression> {
     }
 
     @Override
+    public Expression visitSubtract(GrmParser.SubtractContext ctx) {
+        Expression left = visit(ctx.getChild(0));
+        Expression right = visit(ctx.getChild(2));
+        return new Subtract(left, right);
+    }
+
+    @Override
     public Expression visitEqual(GrmParser.EqualContext ctx) {
         Expression left = visit(ctx.getChild(0));
         Expression right = visit(ctx.getChild(2));
