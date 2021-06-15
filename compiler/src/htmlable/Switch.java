@@ -13,11 +13,7 @@ public class Switch extends Htmlable {
     public Switch(Expression arg, Map<Expression, Htmlable> cases, Htmlable elseBlock, int line, int column) {
         this.line = line;
         this.column = column;
-        cases.keySet().stream()
-                .filter(it -> !it.getType().equals(arg.getType()))
-                .forEach(it -> {
-                    throw new ProgramException(String.format("Error at: %s, %s. Switch case %s is not the same type as the argument %s", line, column, it.toString(), arg.toString()));
-                });
+
         this.arg = arg;
         this.cases = cases;
         this.elseBlock = elseBlock;
@@ -25,6 +21,11 @@ public class Switch extends Htmlable {
 
     @Override
     public String eval() {
+        cases.keySet().stream()
+                .filter(it -> !it.getType().equals(arg.getType()))
+                .forEach(it -> {
+                    throw new ProgramException(String.format("Error at: %s, %s. Switch case %s is not the same type as the argument %s", line, column, it.toString(), arg.toString()));
+                });
         return cases.getOrDefault(arg, elseBlock).toString();
     }
 

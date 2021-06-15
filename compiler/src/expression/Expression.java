@@ -31,7 +31,22 @@ public abstract class Expression {
 
     @Override
     public int hashCode() {
-        return getType() == Type.INTEGER ? intValue() : stringValue().hashCode();
+        try {
+            return intValue();
+        }
+        catch(Exception e) {
+        }
+        try {
+            return stringValue().hashCode();
+        }
+        catch(Exception e) {
+        }
+        try {
+            return listValue().toString().hashCode();
+        }
+        catch(Exception e) {
+        }
+        return 123456;
     }
 
     @Override
