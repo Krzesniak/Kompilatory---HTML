@@ -1,5 +1,7 @@
 package expression;
 
+import app.ProgramException;
+
 import java.util.List;
 
 public class Liste extends Expression {
@@ -15,8 +17,13 @@ public class Liste extends Expression {
     }
 
     @Override
-    public String stringValue() {
-        return toString();
+    public String stringValue(){
+        throw new ProgramException(parent.line, parent.column, "Cannot cast list to string");
+    }
+
+    @Override
+    public int intValue() {
+        throw new ProgramException(parent.line, parent.column, "Cannot cast list to integer");
     }
 
     @Override

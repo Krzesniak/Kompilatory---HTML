@@ -1,5 +1,7 @@
 package expression;
 
+import app.ProgramException;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,11 +21,14 @@ public class Addition extends Expression {
 
     @Override
     public String stringValue() {
-        return switch (left.getType()) {
-            case INTEGER -> Integer.toString(left.intValue() + right.intValue());
-            case LIST -> listValue().stringValue();
-            case STRING -> left.stringValue() + right.stringValue();
-        };
+        final var leftSide = left.stringValue();
+        String rightSide = null;
+        try {
+            rightSide = right.stringValue();
+        } catch (Exception e) {
+            throw new ProgramException(parent.line, parent.column, "Right side of addition is not a string");
+        }
+        return leftSide + rightSide;
     }
 
     @Override

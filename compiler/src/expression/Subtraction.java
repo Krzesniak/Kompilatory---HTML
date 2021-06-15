@@ -2,6 +2,8 @@ package expression;
 
 import app.ProgramException;
 
+import static java.util.stream.Collectors.toList;
+
 public class Subtraction extends Expression {
     private Expression left;
     private Expression right;
@@ -18,12 +20,19 @@ public class Subtraction extends Expression {
 
     @Override
     public String stringValue() {
-        throw new ProgramException(String.format("Error at %d,%d.Cannot subtract strings.", parent.line, parent.column));
+        throw new ProgramException(parent.line, parent.column, "Cannot cast subtraction result to string. Maybe use STRING function?");
     }
 
     @Override
     public Liste listValue() {
-        throw new ProgramException(parent.line, parent.column, "Cannot substract lists");
+        if(right.getType()!=Type.LIST){
+            var list = left.listValue().getContent();
+            var newList = list.stream()
+                    .filter(it -> !it.equals(right))
+                    .collect(toList());
+            return new Liste(newList);
+        }
+        throw new ProgramException(parent.line, parent.column, "Cannot subtract lists");
     }
 
     @Override

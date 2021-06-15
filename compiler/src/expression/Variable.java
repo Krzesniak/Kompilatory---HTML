@@ -42,17 +42,15 @@ public class Variable extends Expression {
 
     @Override
     public String stringValue() {
-        return switch (type) {
-            case STRING -> valString;
-            case INTEGER -> Integer.toString(valInt);
-            case LIST -> valList.toString();
-        };
+        if (type != Type.STRING)
+            throw new ProgramException(parent.line, parent.column, String.format("%s is not a string", id));
+        return valString;
     }
 
     @Override
     public Liste listValue() {
         if (type != Type.LIST)
-            throw new RuntimeException(String.format("%s is not a list", id));
+            throw new ProgramException(parent.line, parent.column, String.format("%s is not a list", id));
         return valList;
     }
 

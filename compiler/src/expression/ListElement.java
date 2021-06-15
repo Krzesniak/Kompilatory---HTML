@@ -18,7 +18,10 @@ public class ListElement extends Expression {
 
     @Override
     public String stringValue() {
-        return getElement().stringValue();
+        return switch (getElement().getType()) {
+            case STRING -> getElement().stringValue();
+            default -> throw new ProgramException(parent.line, parent.column, "Cannot cast list element to string. Maybe use STRING function?");
+        };
     }
 
     @Override

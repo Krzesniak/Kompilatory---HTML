@@ -19,7 +19,7 @@ div {
 }
 
 each [1,2,3,4,5,6] as var {
-"Row: " + $var
+"Row: " + STRING($var)
 }
     switch(2+2) {
         4 -> div{
@@ -28,6 +28,7 @@ each [1,2,3,4,5,6] as var {
         else -> div{}
     }
 
+//$var2
     "Hello "+ STRING(2)
 
    STRING(2+2)
@@ -35,11 +36,12 @@ each [1,2,3,4,5,6] as var {
 
    repeat($var2) {
     div {
-    $var
+    STRING($var)
     }
     }
 
    div {
+        //TODO dla variable linie sie nie zgadzaja
        <
            $arr = [1,2,3,4,5]
            $nietablica = 150
@@ -47,31 +49,33 @@ each [1,2,3,4,5,6] as var {
 
            //$przypisanie_nieistniejacej_zmiennej = $nieistniejaca_zmienna
        >
-           //"wyłuskanie nie intem " + $arr["xd"]
+           STRING($arr)
+           "A teraz wyluskanie"
+           //"hello" + $arr[1] //TODO
 
            //"wyłuskanie nietablicy " + $nietablica[3]
 
            //"out of bounds " + $arr[5] //TODO FIX
 
            //"nielegalna_operacja" % 2
-           //5 % [1,2,3] //TODO idiotyczny błąd
-           //4-3 //TODO idiotyczny błąd
-           //3 //TODO idiotyczny błąd
-           [1,2,3] //TODO a tu czemu błędu nie ma?
-           //$arr - $arr //prawidlowe,gdyz jak uzywasz zmiennych niestringowych od razu bez STRING to jest stringiem
-           //ODP. złe rozwiązanie które daje idiotyczne błędy. Skoro jest niejawne costowanie do stringa to czemu linia zawierająca tylko 3 wyrzuca cannont 3 cast to string? I dlaczego castuje pierwszy element do stringa  a potem próbuje wykonać operacje, zamiast na wyniku, co to za upiorna kolejność działań?
+           //5 % [1,2,3]
+           //4-3 // idiotyczny błąd, blad jest dobry bo bez spacji postrzegane to jest jako dwie liczby po prostu
+           //3
+           //[1,2,3]
+           //$arr - $arr //
            //$arr + 3 // dodaje element do listy
            //3 //wiadomosc cannot cast nic nie mówi. powinno być, że w htmleleent mogą znajdować się tylko stringi
           //"ARR ADD"+ STRING($arr + $arr) //
           // "aRR MUL"+ STRING($arr * $arr)
            //STRING($arr - $arr)
-           //STRING($arr - 3) //TODO niemądra wiadomość błędu
-           //STRING(3 - $arr) //TODO niemądra wiadomość błędu
-           //STRING("XD"+3) //TODO niemądra wiadomość błędu
+           "Usuwanie z listy"
+           STRING($arr - 3) //usuwam po prostu 3 z listy
+           //STRING(3 - $arr) //TODO zla linia
+           //STRING("XD"+3) //jest git
            //STRING($arr+3)
            //STRING(3 + $arr)
-           //STRING(3 * "xd") //TODO niemądra wiadomość błędu
-           //STRING(3 - [1,2]) //TODO FIX
+           //STRING(3 * "xd") //jest git
+           //STRING(3 - [1,2]) //dla mnie ok wiadomosc i tak juz sie zamieznia zrobilo, w c++ sa o wiele gorsze xd
 
 
            "odejmowanie 5-3= " + STRING(5 - 3)
@@ -92,7 +96,6 @@ each [1,2,3,4,5,6] as var {
             // "liczba: " + $var
            //}
 
-           $arr
    }
 
    //repeat("nieliczba") {

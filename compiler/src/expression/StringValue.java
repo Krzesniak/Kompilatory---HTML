@@ -11,7 +11,7 @@ public class StringValue extends Expression {
 
     @Override
     public int intValue() {
-        throw new ProgramException(parent.line, parent.column, String.format("Cannot cast %s to int!", value));
+        throw new ProgramException(parent.line, parent.column, "Cannot cast string to integer!");
     }
 
     @Override
