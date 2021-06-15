@@ -42,7 +42,7 @@ each [1,2,3,4,5,6] as var {
    div {
        <
            $arr = [1,2,3,4,5]
-           $nietablica = 15
+           $nietablica = 150
            $liczba = 15
 
            //$przypisanie_nieistniejacej_zmiennej = $nieistniejaca_zmienna
@@ -54,20 +54,24 @@ each [1,2,3,4,5,6] as var {
            //"out of bounds " + $arr[5] //TODO FIX
 
            //"nielegalna_operacja" % 2
-           $arr + $arr //nie wywala bledu po prostu dodaje listy
-           $arr - $arr //prawidlowe,gdyz jak uzywasz zmiennych niestringowych od razu bez STRING to jest stringiem
-           $arr + 3 // dodaje element do listy
-           //3 //wiadomosc jest dobra
-          "ARR ADD"+ STRING($arr + $arr) //
+           //5 % [1,2,3] //TODO idiotyczny błąd
+           //4-3 //TODO idiotyczny błąd
+           //3 //TODO idiotyczny błąd
+           [1,2,3] //TODO a tu czemu błędu nie ma?
+           //$arr - $arr //prawidlowe,gdyz jak uzywasz zmiennych niestringowych od razu bez STRING to jest stringiem
+           //ODP. złe rozwiązanie które daje idiotyczne błędy. Skoro jest niejawne costowanie do stringa to czemu linia zawierająca tylko 3 wyrzuca cannont 3 cast to string? I dlaczego castuje pierwszy element do stringa  a potem próbuje wykonać operacje, zamiast na wyniku, co to za upiorna kolejność działań?
+           //$arr + 3 // dodaje element do listy
+           //3 //wiadomosc cannot cast nic nie mówi. powinno być, że w htmleleent mogą znajdować się tylko stringi
+          //"ARR ADD"+ STRING($arr + $arr) //
           // "aRR MUL"+ STRING($arr * $arr)
            //STRING($arr - $arr)
-           //STRING($arr-3) //TODO
-           //STRING(3 - $arr)
-           //STRING("XD"+3)
+           //STRING($arr - 3) //TODO niemądra wiadomość błędu
+           //STRING(3 - $arr) //TODO niemądra wiadomość błędu
+           //STRING("XD"+3) //TODO niemądra wiadomość błędu
            //STRING($arr+3)
            //STRING(3 + $arr)
-           //STRING(3 * "xd")
-
+           //STRING(3 * "xd") //TODO niemądra wiadomość błędu
+           //STRING(3 - [1,2]) //TODO FIX
 
 
            "odejmowanie 5-3= " + STRING(5 - 3)
