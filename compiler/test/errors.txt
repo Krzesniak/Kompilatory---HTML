@@ -41,7 +41,6 @@ each [1,2,3,4,5,6] as var {
     }
 
    div {
-        //TODO dla variable linie sie nie zgadzaja
        <
            $arr = [1,2,3,4,5]
            $nietablica = 150
@@ -69,7 +68,7 @@ each [1,2,3,4,5,6] as var {
            //STRING($arr - $arr)
            "Usuwanie z listy"
            //STRING($arr - 3) //usuwam po prostu 3 z listy
-           //STRING(3 - $arr) //TODO zla linia
+           //STRING(3 - $arr)
            //STRING("XD"+3) //jest git
            //STRING($arr+3)
            //STRING(3 + $arr)
@@ -81,15 +80,15 @@ each [1,2,3,4,5,6] as var {
            "mnozenie 5*3= " + STRING(5 * 3)
            "wiekszy 11 > 2= " + STRING(11 > 2)
            "mniejszy 11 < 2= " + STRING(11 < 2)
-           //switch(4) { //TODO FIX
-             //  $liczba -> "jeden"
-               //else -> "niejeden"
-           //}
+           switch(4) {
+             $liczba -> "jeden"
+              else -> "niejeden"
+           }
 
-           switch($liczba) { //TODO FIX
-                15 -> "jeden"
-               else -> "niejeden"
-          }
+         //  switch($liczba) {
+           //     15 -> "jeden"
+             //  else -> "niejeden"
+          //}
 
            //each [$liczba, $nieistniejaca] as var {
             // "liczba: " + $var
@@ -100,9 +99,7 @@ each [1,2,3,4,5,6] as var {
    //     "repeat(nieliczba)"
    //}
 
-   comp("za","duzo", "argumentow") //TODO ignoruje zbedny argument, można naprawić ale niekoniecznie
-
-   //comp("za_malo_argumentow") //TODO FIX
+   comp("za","duzo", "argumentow")
 
     //c1() //co w przypadku stackoverflow, tu ciezko cos zmienic bo errora nie obsluzysz
 }
