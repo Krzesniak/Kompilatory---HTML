@@ -11,7 +11,7 @@ public class Component extends Htmlable{
 
     public Component(ComponentDefinition definition, List<Expression> args){
         if(definition.argsIds.size()>args.size()){
-            throw new ProgramException(parent.line, parent.column, "Too little arguments");
+            throw new ProgramException("Too little arguments in  calling component " + definition.id);
         }
         this.definition = definition;
         this.args = args;

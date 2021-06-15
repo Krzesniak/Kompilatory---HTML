@@ -101,5 +101,7 @@ each [1,2,3,4,5,6] as var {
 
    comp("za","duzo", "argumentow")
 
+   comp("za_malo_argumentow")
+
     //c1() //co w przypadku stackoverflow, tu ciezko cos zmienic bo errora nie obsluzysz
 }
