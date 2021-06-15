@@ -51,11 +51,10 @@ each [1,2,3,4,5,6] as var {
        >
            STRING($arr)
            "A teraz wyluskanie"
-           //"hello" + $arr[1] //TODO
 
            //"wyłuskanie nietablicy " + $nietablica[3]
 
-           //"out of bounds " + $arr[5] //TODO FIX
+           "out of bounds " + STRING($arr[5]) //TODO FIX
 
            //"nielegalna_operacja" % 2
            //5 % [1,2,3]
@@ -69,14 +68,14 @@ each [1,2,3,4,5,6] as var {
           // "aRR MUL"+ STRING($arr * $arr)
            //STRING($arr - $arr)
            "Usuwanie z listy"
-           STRING($arr - 3) //usuwam po prostu 3 z listy
+           //STRING($arr - 3) //usuwam po prostu 3 z listy
            //STRING(3 - $arr) //TODO zla linia
            //STRING("XD"+3) //jest git
            //STRING($arr+3)
            //STRING(3 + $arr)
            //STRING(3 * "xd") //jest git
            //STRING(3 - [1,2]) //dla mnie ok wiadomosc i tak juz sie zamieznia zrobilo, w c++ sa o wiele gorsze xd
-
+            //STRING([1,2] % 3)
 
            "odejmowanie 5-3= " + STRING(5 - 3)
            "mnozenie 5*3= " + STRING(5 * 3)
@@ -95,7 +94,6 @@ each [1,2,3,4,5,6] as var {
            //each [$liczba, $nieistniejaca] as var {
             // "liczba: " + $var
            //}
-
    }
 
    //repeat("nieliczba") {
