@@ -54,7 +54,7 @@ each [1,2,3,4,5,6] as var {
 
            //"wyłuskanie nietablicy " + $nietablica[3]
 
-           "out of bounds " + STRING($arr[5]) //TODO FIX
+           "out of bounds " + STRING($arr[5])
 
            //"nielegalna_operacja" % 2
            //5 % [1,2,3]
@@ -88,8 +88,8 @@ each [1,2,3,4,5,6] as var {
 
            //switch($arr) { //TODO FIX
              //   1 -> "jeden"
-             //   else -> "niejeden"
-          // }
+          //     else -> "niejeden"
+          //}
 
            //each [$liczba, $nieistniejaca] as var {
             // "liczba: " + $var

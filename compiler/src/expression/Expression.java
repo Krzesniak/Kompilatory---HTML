@@ -26,7 +26,6 @@ public abstract class Expression {
 
     public abstract Type getType();
 
-    //probably evil
     public void spreadParent() {
     }
 

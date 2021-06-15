@@ -25,6 +25,8 @@ public class Addition extends Expression {
         String rightSide = null;
         try {
             rightSide = right.stringValue();
+        } catch (IndexOutOfBoundsException e) {
+            throw new ProgramException(e.getMessage());
         } catch (Exception e) {
             throw new ProgramException(parent.line, parent.column, "Right side of addition is not a string");
         }
@@ -33,6 +35,9 @@ public class Addition extends Expression {
 
     @Override
     public Liste listValue() {
+        if (left.getType() != Type.LIST) {
+            throw new ProgramException(parent.line, parent.column, "Left side of addition is not a list");
+        }
         ArrayList<Expression> content = new ArrayList<>(left.listValue().getContent());
         if (right.getType() != Type.LIST) {
             content.add(right);

@@ -47,7 +47,7 @@ public class ListElement extends Expression {
         if (!index.getType().equals(Type.INTEGER))
             throw new ProgramException(String.format("Error at %s, %s.List index must be integer", parent.line, parent.column));
         if (index.intValue() < 0 || index.intValue() >= liste.listValue().getSize())
-            throw new ProgramException(String.format("Error at %s, %s. Index %d out of bounds", parent.line, parent.column, index.intValue()));
+            throw new IndexOutOfBoundsException(String.format("Error at %s, %s. Index %d out of bounds", parent.line, parent.column, index.intValue()));
         return liste.listValue().getElement(index);
     }
 }
