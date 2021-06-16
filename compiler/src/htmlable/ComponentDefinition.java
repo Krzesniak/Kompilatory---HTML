@@ -1,5 +1,7 @@
 package htmlable;
 
+import app.ProgramException;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,7 +9,8 @@ public class ComponentDefinition extends Htmlable {
     String id;
     List<String> argsIds= new ArrayList<>();
 
-    public ComponentDefinition() {
+    public ComponentDefinition(List<String> errors) {
+        super(errors);
     }
 
     public int argIndex(String id) {
@@ -20,10 +23,16 @@ public class ComponentDefinition extends Htmlable {
 
     @Override
     public String eval() {
+        try {
         StringBuilder res = new StringBuilder();
         for(Htmlable h : htmlables)
-            res.append(h.toString()).append("\n");
+            res.append(h.eval()).append("\n");
 
         return res.toString();
+        }
+        catch (ProgramException pe) {
+            errors.add(pe.getMessage());
+            return "err";
+        }
     }
 }

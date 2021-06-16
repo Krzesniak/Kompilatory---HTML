@@ -37,18 +37,26 @@ public class App {
         }
         prog.htmlDocument.spreadParent();
 
-        if (!prog.errors.isEmpty()) {
-            for (String err : prog.errors)
-                System.out.println(err);
-        } else {
+//        if (!prog.errors.isEmpty()) {
+//            for (String err : prog.errors)
+//                System.out.println(err);
+//        } else {
             try {
                 String result = prog.htmlDocument.eval();
-                System.out.println(result);
-                Files.writeString(Paths.get("index.html"), result);
+
+                if (!prog.errors.isEmpty()) {
+                    System.out.println(prog.errors.size());
+                    for (String err : prog.errors)
+                        System.out.println(err);
+                }
+                else {
+                    System.out.println(result);
+                    Files.writeString(Paths.get("index.html"), result);
+                }
             } catch (ProgramException e) {
                 System.out.println(e.getMessage());
             }
-        }
+        //}
         //System.out.println(prog.htmlDocument.toString());
     }
 

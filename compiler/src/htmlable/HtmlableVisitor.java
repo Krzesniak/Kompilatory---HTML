@@ -33,7 +33,7 @@ public class HtmlableVisitor extends GrmBaseVisitor<Htmlable> {
     public Htmlable visitHTML_element(GrmParser.HTML_elementContext ctx) {
         String name = ctx.getChild(0).toString();
 
-        HtmlElement htmlElement = new HtmlElement(name);
+        HtmlElement htmlElement = new HtmlElement(errors,name);
         setLineAndColumn(htmlElement,ctx.ID().getSymbol());
 
         addArguments(htmlElement, ctx);
@@ -54,7 +54,7 @@ public class HtmlableVisitor extends GrmBaseVisitor<Htmlable> {
     @Override
     public Htmlable visitHTML_inner(GrmParser.HTML_innerContext ctx) {
         Expression expression = expressionVisitor.visit(ctx.getChild(0));
-        final var htmlInner= new HtmlInner(expression);
+        final var htmlInner= new HtmlInner(errors,expression);
         setLineAndColumn(htmlInner,ctx.getStart());
         return htmlInner ;
     }
@@ -62,7 +62,7 @@ public class HtmlableVisitor extends GrmBaseVisitor<Htmlable> {
     @Override
     public Htmlable visitRepeat(GrmParser.RepeatContext ctx) {
         Expression arg = expressionVisitor.visit(ctx.getChild(2));
-        Repeat repeat = new Repeat(arg);
+        Repeat repeat = new Repeat(errors,arg);
         setLineAndColumn(repeat, ctx.REPEAT().getSymbol());
 
         for (GrmParser.HtmlableContext hc : ctx.htmlable()) {
@@ -87,7 +87,7 @@ public class HtmlableVisitor extends GrmBaseVisitor<Htmlable> {
             args.add(arg);
         }
 
-        Each each = new Each(var, args);
+        Each each = new Each(errors,var, args);
         setLineAndColumn(each, ctx.EACH().getSymbol());
 
         for (int i = 7; i < ctx.getChildCount() - 1; i++) {
@@ -117,7 +117,7 @@ public class HtmlableVisitor extends GrmBaseVisitor<Htmlable> {
                 .takeWhile(it -> !it.getChild(0).getText().equals("else"))
                 .collect(Collectors.toMap(it -> expressionVisitor.visit(it.getChild(0)), it -> visit(it.getChild(2))));
 
-        return new Switch(expression, htmlables, elseBlock, line, column);
+        return new Switch(errors,expression, htmlables, elseBlock, line, column);
     }
 
     @Override
@@ -139,7 +139,7 @@ public class HtmlableVisitor extends GrmBaseVisitor<Htmlable> {
             args.add(arg);
         }
 
-        return new Component(definition, args);
+        return new Component(errors,definition, args);
     }
 
     public void addArguments(HtmlElement htmlElement, GrmParser.HTML_elementContext ctx) {

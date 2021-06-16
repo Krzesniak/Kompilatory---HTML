@@ -14,16 +14,20 @@ public abstract class Htmlable {
     Map<String, Variable> variables;
     Map<String, Expression> arguments;
     CodeBlock codeBlock;
+    List<String> errors;
 
     public int line;
     public int column;
 
     public Htmlable parent;
 
-    Htmlable() {
+    public boolean hasError = false;
+
+    Htmlable(List<String> errors) {
         htmlables = new LinkedList<>();
         variables = new LinkedHashMap<>();
         arguments = new LinkedHashMap<>();
+        this.errors = errors;
     }
 
     void addHtmlable(Htmlable h) {
@@ -72,6 +76,8 @@ public abstract class Htmlable {
     public abstract String eval();
 
     public String toString() {
-        return eval();
+        if(!hasError)
+            return eval();
+        return "!!!ERROR!!!";
     }
 }

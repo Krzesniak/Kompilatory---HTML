@@ -28,7 +28,7 @@ public class ComponentVisitor1 extends GrmBaseVisitor<Htmlable> {
             errors.add("Error: component " + componentId + " redefined at (" + line + "," + column + ")");
         }
         else {
-            ComponentDefinition componentDefinition = new ComponentDefinition();
+            ComponentDefinition componentDefinition = new ComponentDefinition(errors);
             componentDefinitions.put(componentId, componentDefinition);
         }
 

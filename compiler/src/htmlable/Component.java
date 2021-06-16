@@ -9,12 +9,18 @@ public class Component extends Htmlable{
     private final ComponentDefinition definition;
     private final List<Expression> args;
 
-    public Component(ComponentDefinition definition, List<Expression> args){
-        if(definition.argsIds.size()>args.size()){
-            throw new ProgramException("Too little arguments in  calling component " + definition.id);
-        }
+    public Component(List<String> errors, ComponentDefinition definition, List<Expression> args){
+        super(errors);
         this.definition = definition;
         this.args = args;
+        try {
+            if (definition.argsIds.size() > args.size()) {
+                throw new ProgramException("Too little arguments in  calling component " + definition.id);
+            }
+        }
+        catch (ProgramException pe) {
+            errors.add(pe.getMessage());
+        }
     }
 
     @Override
@@ -23,7 +29,13 @@ public class Component extends Htmlable{
         if(argIx == -1)
             return super.getVariable(id);
 
-        return args.get(argIx);
+        try {
+            return args.get(argIx);
+        }
+        catch (Exception e) {
+            //errors.add("Argument not found");
+            return null;
+        }
     }
 
     @Override
@@ -37,7 +49,13 @@ public class Component extends Htmlable{
 
     @Override
     public String eval() {
-        definition.parent = this;
-        return definition.toString();
+        try {
+            definition.parent = this;
+            return definition.toString();
+        }
+        catch (ProgramException pe) {
+            errors.add(pe.getMessage());
+            return "ERR";
+        }
     }
 }
