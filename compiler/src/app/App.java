@@ -24,6 +24,8 @@ public class App {
         GrmParser parser = getParser(fileName);
 
         ParseTree antlrAST = parser.prog();
+        if(ErrorListner.hasError)
+            return;
 
         ProgVisitor progVisitor = new ProgVisitor();
         Program prog;
@@ -58,6 +60,9 @@ public class App {
             GrmLexer lexer = new GrmLexer(input);
             CommonTokenStream tokens = new CommonTokenStream(lexer);
             parser = new GrmParser(tokens);
+
+            parser.removeErrorListeners();
+            parser.addErrorListener(new ErrorListner());
         } catch (IOException e) {
             e.printStackTrace();
         }

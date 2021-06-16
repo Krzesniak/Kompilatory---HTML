@@ -45,7 +45,7 @@ each [1,2,3,4,5,6] as var {
            $arr = [1,2,3,4,5]
            $nietablica = 150
            $liczba = 15
-
+            //$arr + 5
            //$przypisanie_nieistniejacej_zmiennej = $nieistniejaca_zmienna
        >
            STRING($arr)
@@ -99,9 +99,9 @@ each [1,2,3,4,5,6] as var {
    //     "repeat(nieliczba)"
    //}
 
-   comp("za","duzo", "argumentow")
+   //comp("za","duzo", "argumentow")
 
-   comp("za_malo_argumentow")
+   //comp("za_malo_argumentow")
 
     //c1() //co w przypadku stackoverflow, tu ciezko cos zmienic bo errora nie obsluzysz
 }
