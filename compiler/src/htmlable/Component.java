@@ -14,7 +14,7 @@ public class Component extends Htmlable{
         this.definition = definition;
         this.args = args;
         try {
-            if (definition.argsIds.size() > args.size()) {
+            if (definition != null && definition.argsIds.size() > args.size()) {
                 throw new ProgramException("Too little arguments in  calling component " + definition.id);
             }
         }
@@ -50,8 +50,11 @@ public class Component extends Htmlable{
     @Override
     public String eval() {
         try {
-            definition.parent = this;
-            return definition.toString();
+            if(definition != null) {
+                definition.parent = this;
+                return definition.toString();
+            }
+            return "ERR";
         }
         catch (ProgramException pe) {
             errors.add(pe.getMessage());

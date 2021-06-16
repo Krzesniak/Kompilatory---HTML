@@ -138,8 +138,8 @@ public class HtmlableVisitor extends GrmBaseVisitor<Htmlable> {
             Expression arg = expressionVisitor.visit(argsTree.getChild(i));
             args.add(arg);
         }
-
-        return new Component(errors,definition, args);
+        Component component = new Component(errors,definition, args);
+        return component;
     }
 
     public void addArguments(HtmlElement htmlElement, GrmParser.HTML_elementContext ctx) {
